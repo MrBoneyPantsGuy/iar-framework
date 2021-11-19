@@ -2,8 +2,15 @@ const Salesman = require('../models/Salesman');
 
 exports.getSalesmanById = async (req, res) => {
     const db = req.app.get('db');
+    const id = req.params["id"];
+    let resultSet;
+    db.collection("personal").find({"employeeId": id}).toArray(function (err, result) {
+        if(err) throw err;
+        resultSet = result;
+        console.log(result);
+    });
 
-    res.status(404).send('Salesman not found');
+    res.status(200).send("Insert Salesman here...");
 }
 
 exports.createSalesman = async (req, res) => {
