@@ -1,4 +1,4 @@
-exports.getSalesman = async (req, res) => {
+exports.getSalesmanById = async (req, res) => {
     const db = req.app.get('db');
 
     res.status(404).send('Salesman not found');
