@@ -15,10 +15,16 @@ const userApi = require('../apis/user-api');
 router.get('/user', checkAuthorization, userApi.getSelf);
 
 const salesmanApi = require('../apis/salesman-api');
-router.get('/salesman/:id', checkAuthorization , salesmanApi.getSalesman);
+router.get('/salesman', checkAuthorization , salesmanApi.getSalesman);
+router.get('/salesman/:id', checkAuthorization , salesmanApi.getSalesmanById);
 router.post('/salesman', checkAuthorization, salesmanApi.createSalesman);
 router.put('/salesman/:id', checkAuthorization, salesmanApi.updateSalesman);
 router.delete('/salesman/:id', checkAuthorization, salesmanApi.deleteSalesman);
 
+const recordApi = require('../apis/record-api');
+router.get('/record/:id', checkAuthorization , recordApi.getRecordById);
+router.post('/record', checkAuthorization, recordApi.createRecord);
+router.put('/record/:id', checkAuthorization, recordApi.updateRecord);
+router.delete('/record/:id', checkAuthorization, recordApi.deleteRecord);
 
 module.exports = router;
