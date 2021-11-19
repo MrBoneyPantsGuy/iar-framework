@@ -1,16 +1,22 @@
 const Salesman = require('../models/Salesman');
 
-exports.getSalesmanById = async (req, res) => {
+exports.getSalesmanById = async (req, res, callback) => {
     const db = req.app.get('db');
     const id = req.params["id"];
-    let resultSet;
-    db.collection("personal").find({"employeeId": id}).toArray(function (err, result) {
-        if(err) throw err;
-        resultSet = result;
-        console.log(result);
-    });
+    let personalCollection = db.collection('personal');
 
-    res.status(200).send("Insert Salesman here...");
+    // helper function with callback to access the result form outside...
+    function returnSalesmanFromCollection(collection, callback) {
+        collection.find({"employeeId": id}).toArray(function (err, result) {
+            if(err) throw err;
+            else callback(result);
+        });
+    }
+
+    // call the helper function and return its results
+    returnSalesmanFromCollection(personalCollection, function(result) {
+        res.status(200).send(result[0]);
+    })
 }
 
 exports.createSalesman = async (req, res) => {
