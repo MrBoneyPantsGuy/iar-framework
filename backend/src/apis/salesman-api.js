@@ -1,3 +1,5 @@
+const Salesman = require('../models/Salesman');
+
 exports.getSalesmanById = async (req, res) => {
     const db = req.app.get('db');
 
@@ -6,8 +8,18 @@ exports.getSalesmanById = async (req, res) => {
 
 exports.createSalesman = async (req, res) => {
     const db = req.app.get('db');
+    const data = req.body;
+    const s1 = new Salesman(undefined, data["firstname"], data["lastname"], data["employeeId"], data["department"]);
 
-    res.status(500).send('Interner Server Fehler');
+    db.collection("personal").insertOne(s1, function (err, res) {
+        if(err) {
+            throw err;
+        }  else {
+            console.log("1 document inserted");
+        }
+    });
+
+    res.status(200).send('OK');
 }
 
 exports.updateSalesman = async (req, res) => {

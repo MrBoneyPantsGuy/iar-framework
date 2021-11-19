@@ -8,7 +8,7 @@
  */
 class Salesman{
     constructor(salesmanId, firstname, lastname, employeeId, department) {
-        this._salesmanId = salesmanId;
+        this._id = salesmanId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.employeeId = employeeId;
