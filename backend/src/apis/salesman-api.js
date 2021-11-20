@@ -1,13 +1,14 @@
 const Salesman = require('../models/Salesman');
 const {ObjectId} = require("mongodb");
 
-exports.getSalesmanById = async (req, res, callback) => {
+exports.getSalesmanById = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
     let personalCollection = db.collection('personal');
 
     // helper function with callback to access the result form outside...
     function returnSalesmanFromCollection(collection, callback) {
+        //TODO: employeeID ist nicht die id in der DB sondern gleich benannt, _id ist salesmanid. Warum nicht findOne?
         collection.find({"employeeId": id}).toArray(function (err, result) {
             if(err) throw err;
             else callback(result);
