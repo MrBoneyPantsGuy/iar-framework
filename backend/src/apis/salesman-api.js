@@ -5,8 +5,9 @@ exports.getSalesmanBySalesmanId = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["salesmanid"];
 
-    db.collection("personal").findOne({"_id": id}, (err, result) => {
+    db.collection("personal").findOne({"_id": new ObjectId(id)}, (err, result) => {
         if (err) res.status(404).send("No such Salesman.");
+        console.log(typeof result);
         res.status(200).send(result);
     });
 }
@@ -19,6 +20,11 @@ exports.getSalesmanByEmployeeId = async (req, res) => {
         if (err) res.status(404).send("No such Salesman.");
         res.status(200).send(result);
     });
+}
+
+exports.querySalesmen = async (req, res) => {
+    const db = req.app.get('db');
+    res.status(404).send("Not yet implemented");
 }
 
 exports.createSalesman = async (req, res) => {

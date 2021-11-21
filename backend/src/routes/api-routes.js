@@ -19,9 +19,9 @@ const userApi = require('../apis/user-api');
 router.get('/user', checkAuthorization(), userApi.getSelf);
 
 const salesmanApi = require('../apis/salesman-api');
-//router.get('/salesman', checkAuthorization , salesmanApi.getSalesman);
-router.get('/salesman/:employeeid', checkAuthorization(), salesmanApi.getSalesmanByEmployeeId);
-router.get('/salesman/:salesmanid', checkAuthorization(), salesmanApi.getSalesmanBySalesmanId);
+router.get('/salesman/id/:salesmanid', checkAuthorization(), salesmanApi.getSalesmanBySalesmanId);
+router.get('/salesman/employeeid/:employeeid', checkAuthorization(), salesmanApi.getSalesmanByEmployeeId);
+router.get('/salesman/query/:attribute/:key', checkAuthorization(), salesmanApi.querySalesmen);
 router.post('/salesman', checkAuthorization(), salesmanApi.createSalesman);
 router.put('/salesman/:id', checkAuthorization(), salesmanApi.updateSalesman);
 router.delete('/salesman/:id', checkAuthorization(), salesmanApi.deleteSalesman);

@@ -7,7 +7,7 @@ exports.getRecordById = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
 
-    db.collection('record').findOne({"_id": id}, (err, result) => {
+    db.collection('record').findOne({"_id": new ObjectId(id)}, (err, result) => {
         if(err) res.status(404).send('Record not found');
         else res.status(200).send(result);
     });
