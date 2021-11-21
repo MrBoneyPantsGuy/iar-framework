@@ -11,7 +11,7 @@
 
 class PerformanceRecord {
     constructor(recordId, salesmanId, socialRecords, ordersRecords, totalBonusA, totalBonusB, remark) {
-        this._recordId = recordId;
+        this._id = recordId;
         this.salesmanId = salesmanId;
         this.socialRecords = socialRecords;
         this.ordersRecords = ordersRecords;
