@@ -52,7 +52,7 @@ exports.updateSalesman = async (req, res) => {
     const data = req.body;
     const salesman = { $set: {firstname: data.firstname, lastname: data.lastname, employeeId: data.employeeId, department: data.department}};
 
-    db.collection("personal").updateOne({"_id": new ObjectId(id)}, salesman, (err) => {
+    db.collection("personal").updateOne({"_id": new ObjectId(id)}, salesman, (err, result) => {
         if (err) throw err;
         if(result === null) {
             res.status(404).send(err);
