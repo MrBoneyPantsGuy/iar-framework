@@ -1,6 +1,4 @@
 const PerformanceRecord = require('../models/PerformanceRecord');
-const SocialRecord = require('../models/SocialRecord');
-const OrdersRecord = require('../models/OrdersRecord');
 const {ObjectId} = require("mongodb");
 
 exports.getRecordById = async (req, res) => {
@@ -8,8 +6,12 @@ exports.getRecordById = async (req, res) => {
     const id = req.params["id"];
 
     db.collection('record').findOne({"_id": new ObjectId(id)}, (err, result) => {
-        if(err) res.status(404).send('Record not found');
-        else res.status(200).send(result);
+        if(err) throw err;
+        if(result === null) {
+            res.status(404).send('Record not found');
+        } else {
+            res.status(200).send(result);
+        }
     });
 }
 
@@ -30,17 +32,25 @@ exports.updateRecord = async (req, res) => {
     const data = req.body;
     const performanceRecord = { $set: {salesmanId: data.salesmanId, socialRecords: data.socialRecords.split(";"), ordersRecords: data.ordersRecords.split(";"), totalBonusA: data.totalBonusA, totalBonusB: data.totalBonusB, remark: data.remark}};
 
-    db.collection('record').updateOne({"_id": new ObjectId(id)}, performanceRecord, (err) => {
-        if (err) res.status(500).send(err);
+    db.collection('record').updateOne({"_id": new ObjectId(id)}, performanceRecord, (err, result) => {
+        if (err) throw err;
+        if(result === null) {
+            res.status(404).send("No such Record");
+        } else {
+            res.status(200).send('OK');
+        }
     })
-    res.status(200).send('OK');
 }
 
 exports.deleteRecord = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
-    db.collection('record').deleteOne({"_id": new ObjectId(id)}, (err) => {
-        if (err) res.status(404).send('Record not found');
-        res.status(200).send("OK");
+    db.collection('record').deleteOne({"_id": new ObjectId(id)}, (err, result) => {
+        if (err) throw err;
+        if(result === null) {
+            res.status(404).send('Record not found');
+        } else {
+            res.status(200).send("OK");
+        }
     })
 }

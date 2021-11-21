@@ -6,9 +6,12 @@ exports.getSalesmanBySalesmanId = async (req, res) => {
     const id = req.params["salesmanid"];
 
     db.collection("personal").findOne({"_id": new ObjectId(id)}, (err, result) => {
-        if (err) res.status(404).send("No such Salesman.");
-        console.log(typeof result);
-        res.status(200).send(result);
+        if (err) throw err;
+        if(result === null) {
+            res.status(404).send("No such Salesman.");
+        } else {
+            res.status(200).send(result);
+        }
     });
 }
 
@@ -17,8 +20,12 @@ exports.getSalesmanByEmployeeId = async (req, res) => {
     const id = req.params["employeeid"];
 
     db.collection("personal").findOne({"employeeId": id}, (err, result) => {
-        if (err) res.status(404).send("No such Salesman.");
-        res.status(200).send(result);
+        if (err) throw err;
+        if(result === null) {
+            res.status(404).send("No such Salesman.");
+        } else {
+            res.status(200).send(result);
+        }
     });
 }
 
@@ -46,16 +53,24 @@ exports.updateSalesman = async (req, res) => {
     const salesman = { $set: {firstname: data.firstname, lastname: data.lastname, employeeId: data.employeeId, department: data.department}};
 
     db.collection("personal").updateOne({"_id": new ObjectId(id)}, salesman, (err) => {
-        if (err) res.status(404).send(err);
-        res.status(200).send("OK");
+        if (err) throw err;
+        if(result === null) {
+            res.status(404).send(err);
+        } else {
+            res.status(200).send("OK");
+        }
     });
 }
 
 exports.deleteSalesman = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
-    db.collection("personal").deleteOne({"_id": new ObjectId(id)}, (err) => {
-        if (err) res.status(404).send("no such Salesman");
-        res.status(200).send("OK");
+    db.collection("personal").deleteOne({"_id": new ObjectId(id)}, (err, result) => {
+        if (err) throw err;
+        if(result === null) {
+            res.status(404).send("no such Salesman");
+        } else {
+            res.status(200).send("OK");
+        }
     })
 }
