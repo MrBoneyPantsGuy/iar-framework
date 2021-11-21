@@ -20,7 +20,8 @@ router.get('/user', checkAuthorization(), userApi.getSelf);
 
 const salesmanApi = require('../apis/salesman-api');
 //router.get('/salesman', checkAuthorization , salesmanApi.getSalesman);
-router.get('/salesman/:id', checkAuthorization(), salesmanApi.getSalesmanById);
+router.get('/salesman/:employeeid', checkAuthorization(), salesmanApi.getSalesmanByEmployeeId);
+router.get('/salesman/:salesmanid', checkAuthorization(), salesmanApi.getSalesmanBySalesmanId);
 router.post('/salesman', checkAuthorization(), salesmanApi.createSalesman);
 router.put('/salesman/:id', checkAuthorization(), salesmanApi.updateSalesman);
 router.delete('/salesman/:id', checkAuthorization(), salesmanApi.deleteSalesman);

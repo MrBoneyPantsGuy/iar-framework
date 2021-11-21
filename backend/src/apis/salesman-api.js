@@ -1,82 +1,55 @@
 const Salesman = require('../models/Salesman');
 const {ObjectId} = require("mongodb");
 
-exports.getSalesmanById = async (req, res) => {
+exports.getSalesmanBySalesmanId = async (req, res) => {
     const db = req.app.get('db');
-    const id = req.params["id"];
+    const id = req.params["salesmanid"];
 
-    db.collection("personal").find({"employeeId": id}).toArray(function (err, result) {
-        if(err) res.status(404).send("Fehler");
-        res.status(200).send(result[0]);
+    db.collection("personal").findOne({"_id": id}, (err, result) => {
+        if (err) res.status(404).send("No such Salesman.");
+        res.status(200).send(result);
+    });
+}
+
+exports.getSalesmanByEmployeeId = async (req, res) => {
+    const db = req.app.get('db');
+    const id = req.params["employeeid"];
+
+    db.collection("personal").findOne({"employeeId": id}, (err, result) => {
+        if (err) res.status(404).send("No such Salesman.");
+        res.status(200).send(result);
     });
 }
 
 exports.createSalesman = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
-    const s1 = new Salesman(undefined, data["firstname"], data["lastname"], data["employeeId"], data["department"]);
+    const salesman = new Salesman(undefined, data["firstname"], data["lastname"], data["employeeId"], data["department"]);
 
-    db.collection("personal").insertOne(s1, function (err, res) {
-        if(err) {
-            throw err;
-        }  else {
-            console.log(s1.firstname + " " + s1.lastname + " inserted");
-        }
+    db.collection("personal").insertOne(salesman, (err) => {
+        if (err) res.status(500).send(err);
+        console.log(salesman.firstname + " " + salesman.lastname + " inserted");
     });
-
-    res.status(200).send('OK');
+    res.status(201).send('OK');
 }
 
 exports.updateSalesman = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
-    const personalCollection = db.collection("personal");
     const data = req.body;
-    const update = { $set: {firstname: data["firstname"], lastname: data["lastname"], employeeId: data["employeeId"], department: data["department"]}};
+    const salesman = { $set: {firstname: data.firstname, lastname: data.lastname, employeeId: data.employeeId, department: data.department}};
 
-    // helper function with callback to access the result form outside...
-    function returnSalesmanFromCollection(collection, callback) {
-        collection.find({"_id": new ObjectId(id)}).toArray(function (err, result) {
-            if(err) throw err;
-            else callback(result);
-        });
-    }
-
-    returnSalesmanFromCollection(personalCollection, function(result) {
-        if(result.length === 0) {
-            res.status(404).send('Salesman not found');
-        } else {
-            db.collection("personal").updateOne({"_id": ObjectId(id)}, update, function (err, res) {
-                if(err) throw err;
-                console.log('Salesman with id '+ id + ' updated');
-            });
-            res.status(200).send('Salesman with id '+ id + ' updated');
-        }
+    db.collection("personal").updateOne({"_id": new ObjectId(id)}, salesman, (err) => {
+        if (err) res.status(404).send(err);
+        res.status(200).send("OK");
     });
 }
 
 exports.deleteSalesman = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
-    const personalCollection = db.collection("personal");
-
-    // helper function with callback to access the result form outside...
-    function returnSalesmanFromCollection(collection, callback) {
-        collection.find({"_id": new ObjectId(id)}).toArray(function (err, result) {
-            if(err) throw err;
-            else callback(result);
-        });
-    }
-
-    returnSalesmanFromCollection(personalCollection, function(result) {
-        if(result.length === 0) {
-            res.status(404).send('Salesman not found');
-        } else {
-            db.collection("personal").deleteOne({"_id": ObjectId(id)}, function (err, res) {
-                if(err) throw err;
-                console.log('Salesman with id '+ id + ' deleted');
-            });
-            res.status(200).send('Salesman with id '+ id + ' deleted');
-        }
-    });
+    db.collection("personal").deleteOne({"_id": new ObjectId(id)}, (err) => {
+        if (err) res.status(404).send("no such Salesman");
+        res.status(200).send("OK");
+    })
 }
