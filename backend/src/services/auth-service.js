@@ -1,3 +1,5 @@
+const authUrl = 'https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/oauth/issueToken';
+const axios = require("axios");
 /**
  * marks user's session as authenticated
  * @param session current session
@@ -26,4 +28,18 @@ exports.deAuthenticate = function (session){
     session.authenticated = false;
     session.user = undefined;
     session.destroy();
+}
+
+exports.getOrangeHRMBearerToken = async () => {
+    const data = {
+        'password': '*Safb02da42Demo$',
+        'username': 'demouser',
+        'grant_type': 'password',
+        'client_id': 'api_oauth_id',
+        'client_secret': 'oauth_secret'
+    }
+    let token = await axios.post(authUrl, data)
+        .then(result => result.data)
+        .catch(err => console.log(err));
+    return(token);
 }

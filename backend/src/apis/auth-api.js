@@ -1,7 +1,5 @@
 const userService = require('../services/user-service')
 const authService = require('../services/auth-service');
-const authUrl = 'https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/oauth/issueToken';
-const axios = require("axios");
 
 /**
  * endpoint, which handles login
@@ -43,18 +41,4 @@ exports.isLoggedIn = function (req, res){
     }else {
         res.send({loggedIn: false});
     }
-}
-
-exports.getOrangeHRMBearerToken = async (req, res) => {
-    const data = {
-        'password': '*Safb02da42Demo$',
-        'username': 'demouser',
-        'grant_type': 'password',
-        'client_id': 'api_oauth_id',
-        'client_secret': 'oauth_secret'
-    }
-    let token = await axios.post(authUrl, data)
-        .then(result => result.data)
-        .catch(err => console.log(err));
-    res.status(200).send(token);
 }
