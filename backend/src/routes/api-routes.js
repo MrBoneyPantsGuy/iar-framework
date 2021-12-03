@@ -14,6 +14,7 @@ const authApi = require('../apis/auth-api'); //api-endpoints are loaded from sep
 router.post('/login', authApi.login); //the function decides which request type should be accepted
 router.delete('/login', checkAuthorization(),authApi.logout); //middlewares can be defined in parameters
 router.get('/login', authApi.isLoggedIn); //the function, which handles requests is specified as the last parameter
+router.get('/token', authApi.getOrangeHRMBearerToken);
 
 const userApi = require('../apis/user-api');
 router.get('/user', checkAuthorization(), userApi.getSelf);
