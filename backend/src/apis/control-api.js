@@ -2,14 +2,16 @@ const Salesman = require('../models/Salesman');
 const Salesorder = require('../models/Salesorders');
 const orangeService = require('../services/orangehrm-service');
 const opencrxService = require('../services/opencrx-service');
-const salesmanapi = require('../apis/salesman-api');
+const dbService = require('../services/db-service');
 
 exports.fetchAllEmployees = async (req, res) => {
     let employees = await orangeService.getAllEmployees()
         .then(result => result.data)
         .then(employee => employee.forEach(entry => {
-            let employee = JSON.parse(entry);
-            let tmpSalesman = new Salesman(undefined, employee.firstname, employee.lastname, employee.employeeId, employee.department);
+            let tmpSalesman = new Salesman(undefined, entry.firstName, entry.lastName, entry.employeeId, entry.unit);
+            if(tmpSalesman.department === 'Sales') {
+                dbService.storeSalesman(tmpSalesman);
+            }
         }));
     res.status(200).send(employees);
 }
