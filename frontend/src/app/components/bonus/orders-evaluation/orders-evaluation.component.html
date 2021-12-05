@@ -1,0 +1,22 @@
+<table  id="tableA">
+  <tr>
+    <td>Name of Product</td>
+    <td>Client</td>
+    <td>Client Ranking</td>
+    <td>Items</td>
+    <td>Bonus</td>
+  </tr>
+  <tr>
+    <td><button (click)="addRow()" class="addBtn">+</button><input type="text" /></td>
+    <td><input type="text" /></td>
+    <td>
+      <select>
+        <option *ngFor="let key of enumKeys" [value]="key">
+          {{ clientRankings[key] }}
+        </option>
+      </select>
+    </td>
+    <td><input type="text" /></td>
+    <td><input type="text" /></td>
+  </tr>
+</table>
