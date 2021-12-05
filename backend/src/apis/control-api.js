@@ -1,5 +1,6 @@
 const Salesman = require('../models/Salesman');
 const Salesorder = require('../models/Salesorders');
+const Customer = require('../models/Customers');
 const orangeService = require('../services/orangehrm-service');
 const opencrxService = require('../services/opencrx-service');
 const dbService = require('../services/db-service');
@@ -16,15 +17,26 @@ exports.fetchAllEmployees = async (req, res) => {
     res.status(200).send(employees);
 }
 
+exports.getAllCustomers = async (req, res) => {
+    let c = [];
+    let customers = await opencrxService.getAllCustomers()
+        .then(customer => customer.forEach(entry => {
+            let customer = new Customer(entry._id, entry.name, entry.accountRating);
+            c.push(customer);
+        }))
+        .catch(err => { console.log(err) })
+    res.status(200).send(c);
+}
+
 exports.getAllSalesorders = async (req, res) => {
+    let s = [];
     let salesorders = await opencrxService.getSalesorders()
-        .then(result => result.data)
         .then(salesorder => salesorder.forEach(entry => {
-            let salesorder = JSON.parse(entry);
-            let order = new Salesorder(salesorder._id, salesorder.customername, salesorder.clientRankingNumber, salesorder.salesmanId, salesorder.itemsHooverGo, salesorder.itemsHooverClean, salesorder.year);
+            let order = new Salesorder(entry._id, entry.customername, entry.clientRankingNumber, entry.salesmanId, entry.itemsHooverGo, entry.itemsHooverClean, entry.year);
+            s.push(order);
         }))
         .catch(err => {
             console.log(err)
         })
-    res.status(200).send(salesorders);
+    res.status(200).send(s);
 }

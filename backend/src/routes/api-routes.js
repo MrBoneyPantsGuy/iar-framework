@@ -35,4 +35,5 @@ router.delete('/record/:id', checkAuthorization(), recordApi.deleteRecord);
 const controlApi = require('../apis/control-api');
 router.get('/control/fetchemployees', checkAuthorization(), controlApi.fetchAllEmployees);
 router.get('/control/getallsalesorders', checkAuthorization(), controlApi.getAllSalesorders);
+router.get('/control/getallcustomers', checkAuthorization(), controlApi.getAllCustomers);
 module.exports = router;
