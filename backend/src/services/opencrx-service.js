@@ -28,13 +28,51 @@ exports.getAllCustomers = async () => {
 }
 
 exports.getSalesorders = async () => {
-    const salesorders = await axios.get(`${baseUrl}/org.opencrx.kernel.contract1/provider/CRX/segment/Standard/salesOrder`, config);
-    const uncleardOrders = salesorders.data.objects;
+    //get all Salesorder
+    const salesordersRes = await axios.get(`${baseUrl}/org.opencrx.kernel.contract1/provider/CRX/segment/Standard/salesOrder`, config);
+    const uncleardOrders = salesordersRes.data.objects;
+    let salesorders = [];
     uncleardOrders.forEach((order) => {
-        const temp = order.salesRep;
-        const tmp = temp['@href'].split('/');
+        //tmp variables for splitting the Salesman href
+        let temp = order.salesRep;
+        let tmp = temp['@href'].split('/');
+        //Id for the responsible salesman
         const salesmanId = tmp[tmp.length];
+        //Id for the Order
         const salesorderId = order['@href'].split('/')[order['@href'].split('/').length];
-        const orderName = order.name;
+        //year of the order
+        const year = order.createdAt.split('-')[0];
+        //tmp variables for splitting the customer href
+        temp = order.customer;
+        tmp = temp['@href'].split('/');
+        //the id of the customer
+        const customerId = tmp[tmp.length];
+        //search for customer details
+        const customer = this.getAllCustomers().forEach((c) => {
+            if(c._id === customerId){
+                return c;
+            }
+        })
+        //number of items of HooverClean
+        let itemsHooverClean;
+        //number of items of HooverGo
+        let itemsHooverGo
+        //get all positions of this salesorder
+        const positions = await.get(`${order['@href']}/position`, config);
+        const unclearedPositions = positions.data.objects;
+        unclearedPositions.forEach((position) => {
+            //check if hooverClean or HooverGo and set number of items sold
+            if(position.productDescription === "Hoover for service agents"){
+                itemsHooverClean = position.quantity;
+            } else {
+                itemsHooverGo = position.quantity;
+            }
+        });
+        //insert all values in a new salesorder
+        let salesorder = new Salesorders(salesorderId, customer.name, customer.accountRating, salesmanId, itemsHooverGo, itemsHooverClean, year);
+        //add salesorder to list
+        salesorders.push(salesorder);
     });
+    //returns all cleared Salesorders
+    return salesorders;
 }

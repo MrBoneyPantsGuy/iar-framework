@@ -1,10 +1,12 @@
 class Salesorders {
-    constructor(salesorderId, customerId, employeeId, itemsHooverGo, itemsHooverClean) {
+    constructor(salesorderId, customername, clientRankingNumber, salesmanId, itemsHooverGo, itemsHooverClean, year) {
         this._id = salesorderId;
-        this.customerId = customerId;
-        this.employeeId = employeeId;
+        this.customername = customername;
+        this.clientRankingNumber = clientRankingNumber
+        this.salesmanId = salesmanId;
         this.itemsHooverGo = itemsHooverGo;
         this.itemsHooverClean = itemsHooverClean;
+        this.year = year;
     }
 }
 
