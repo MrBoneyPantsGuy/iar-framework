@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
+
 const {checkAuthorization} = require('../middlewares/auth-middleware');
 
 /*
@@ -9,6 +12,9 @@ const {checkAuthorization} = require('../middlewares/auth-middleware');
 // ------------------------------------------------------
 // Do not remove brackets from checkAuthorization() call!
 // ------------------------------------------------------
+
+router.use('/api-docs', swaggerUi.serve);
+router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 const authApi = require('../apis/auth-api'); //api-endpoints are loaded from separate files
 router.post('/login', authApi.login); //the function decides which request type should be accepted

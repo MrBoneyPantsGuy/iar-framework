@@ -38,7 +38,7 @@ exports.querySalesmen = async (req, res) => {
 exports.createSalesman = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
-    const salesman = new Salesman(undefined, data["firstname"], data["lastname"], data["employeeId"], data["department"]);
+    const salesman = new Salesman(undefined, data["firstname"], data["lastname"], data["employeeId"], data["department"], data["code"]);
 
     let result = await DBService.storeSalesman(salesman).then(
         res.status(201).send('OK')
@@ -52,7 +52,7 @@ exports.updateSalesman = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
     const data = req.body;
-    const salesman = { $set: {firstname: data.firstname, lastname: data.lastname, employeeId: data.employeeId, department: data.department}};
+    const salesman = { $set: {firstname: data.firstname, lastname: data.lastname, employeeId: data.employeeId, department: data.department, governmentId: data.governmentId}};
 
     db.collection("personal").updateOne({"_id": new ObjectId(id)}, salesman, (err, result) => {
         if (err) throw err;

@@ -40,17 +40,20 @@ exports.getPositions = async (link) => {
     return po;
 }
 
+exports.getGovernmentId = async (link) => {
+    const response = await axios.get(`${link}`, config);
+    const salesman = response.data;
+    return salesman.governmentId;
+}
+
 exports.getSalesorders = async () => {
     //get all Salesorder
     const salesordersRes = await axios.get(`${baseUrl}/org.opencrx.kernel.contract1/provider/CRX/segment/Standard/salesOrder`, config);
     const uncleardOrders = salesordersRes.data.objects;
     let salesorders = [];
     for(let order of uncleardOrders){
-        //tmp variables for splitting the Salesman href
-        let temp = order.salesRep;
-        let tmp = temp['@href'].split('/');
-        //Id for the responsible salesman
-        const salesmanId = tmp[tmp.length-1];
+        //set governmentId (only id that is in both services)
+        const governmentId = await this.getGovernmentId(order.salesRep['@href']);
         //Id for the Order
         const salesorderId = order['@href'].split('/')[order['@href'].split('/').length-1];
         //year of the order
@@ -83,11 +86,11 @@ exports.getSalesorders = async () => {
             }
         }));
         //insert all values in a new salesorder
-        let salesorder = new Salesorders(salesorderId, customer.name, customer.accountRating, salesmanId, itemsHooverGo, itemsHooverClean, year);
+        let salesorder = new Salesorders(salesorderId, customer.name, customer.accountRating, governmentId, itemsHooverGo, itemsHooverClean, year);
         //add salesorder to list
         salesorders.push(salesorder);
     };
     //returns all cleared Salesorders
-    console.log(salesorders)
     return salesorders;
 }
+
