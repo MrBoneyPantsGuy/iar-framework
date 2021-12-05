@@ -28,7 +28,7 @@ exports.storeRecord = async (salesorder) => {
     try {
         await client.connect();
         let checkRecord = await client.db('intArch').collection("record").findOne({"salesmanId": salesorder.salesmanId, "year": salesorder.year});
-        let salesman = await client.db('intArch').collection("person").findOne({"salesmanId": salesorder.salesmanId});
+        let salesman = await client.db('intArch').collection("person").findOne({"governmentId": salesorder.governmentId});
         console.log(salesman);
         let orders = [];
         if(salesorder.itemsHooverClean !== undefined){
