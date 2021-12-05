@@ -9,7 +9,7 @@ exports.fetchAllEmployees = async (req, res) => {
     let employees = await orangeService.getAllEmployees()
         .then(result => result.data)
         .then(employee => employee.forEach(entry => {
-            let tmpSalesman = new Salesman(undefined, entry.firstName, entry.lastName, entry.employeeId, entry.unit);
+            let tmpSalesman = new Salesman(undefined, entry.firstName, entry.lastName, entry.employeeId, entry.unit, entry.code);
             if(tmpSalesman.department === 'Sales') {
                 dbService.storeSalesman(tmpSalesman);
             }
@@ -38,5 +38,6 @@ exports.getAllSalesorders = async (req, res) => {
         .catch(err => {
             console.log(err)
         })
+    let storage = await dbService.storeRecord(s[0]).then(console.log);
     res.status(200).send(s);
 }
