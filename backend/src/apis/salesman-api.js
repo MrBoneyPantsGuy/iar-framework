@@ -1,5 +1,6 @@
 const Salesman = require('../models/Salesman');
 const {ObjectId} = require("mongodb");
+const DBService = require('../services/db-service');
 
 exports.getSalesmanBySalesmanId = async (req, res) => {
     const db = req.app.get('db');
@@ -39,11 +40,12 @@ exports.createSalesman = async (req, res) => {
     const data = req.body;
     const salesman = new Salesman(undefined, data["firstname"], data["lastname"], data["employeeId"], data["department"]);
 
-    db.collection("personal").insertOne(salesman, (err) => {
-        if (err) res.status(500).send(err);
-        console.log(salesman.firstname + " " + salesman.lastname + " inserted");
+    let result = await DBService.storeSalesman(salesman).then(
+        res.status(201).send('OK')
+    ).catch(err => {
+        res.status(500).send(err);
+        console.log(err);
     });
-    res.status(201).send('OK');
 }
 
 exports.updateSalesman = async (req, res) => {
