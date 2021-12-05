@@ -9,7 +9,7 @@ exports.fetchAllEmployees = async (req, res) => {
     let employees = await orangeService.getAllEmployees()
         .then(result => result.data)
         .then(employee => employee.forEach(entry => {
-            let tmpSalesman = new Salesman(undefined, entry.firstName, entry.lastName, entry.employeeId, entry.unit);
+            let tmpSalesman = new Salesman(undefined, entry.firstName, entry.lastName, entry.employeeId, entry.unit, entry.code);
             if(tmpSalesman.department === 'Sales') {
                 dbService.storeSalesman(tmpSalesman);
             }
@@ -30,13 +30,14 @@ exports.getAllCustomers = async (req, res) => {
 
 exports.getAllSalesorders = async (req, res) => {
     let s = [];
-    let salesorders = await opencrxService.getSalesorders()
-        .then(salesorder => salesorder.forEach(entry => {
-            let order = new Salesorder(entry._id, entry.customername, entry.clientRankingNumber, entry.salesmanId, entry.itemsHooverGo, entry.itemsHooverClean, entry.year);
-            s.push(order);
-        }))
+    let salesOrdersResult = await opencrxService.getSalesorders()
         .catch(err => {
             console.log(err)
         })
+    for(let salesOrder of salesOrdersResult) {
+        let order = new Salesorder(salesOrder._id, salesOrder.customername, salesOrder.clientRankingNumber, salesOrder.governmentId, salesOrder.itemsHooverGo, salesOrder.itemsHooverClean, salesOrder.year);
+        let storage = await dbService.storeRecord(order).catch(err => console.log(err));
+        s.push(order);
+    }
     res.status(200).send(s);
 }

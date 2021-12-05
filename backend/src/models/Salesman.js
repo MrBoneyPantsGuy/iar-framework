@@ -7,11 +7,12 @@
  * @param {string} department
  */
 class Salesman{
-    constructor(salesmanId, firstname, lastname, employeeId, department) {
+    constructor(salesmanId, firstname, lastname, employeeId, department, governmentId) {
         this._id = salesmanId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.employeeId = employeeId;
+        this.governmentId = governmentId;
         this.department = department;
     }
 }
