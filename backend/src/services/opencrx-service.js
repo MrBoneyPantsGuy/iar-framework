@@ -45,7 +45,7 @@ exports.getSalesorders = async () => {
     const salesordersRes = await axios.get(`${baseUrl}/org.opencrx.kernel.contract1/provider/CRX/segment/Standard/salesOrder`, config);
     const uncleardOrders = salesordersRes.data.objects;
     let salesorders = [];
-    uncleardOrders.forEach(async (order) => {
+    for(let order of uncleardOrders){
         //tmp variables for splitting the Salesman href
         let temp = order.salesRep;
         let tmp = temp['@href'].split('/');
@@ -86,7 +86,7 @@ exports.getSalesorders = async () => {
         let salesorder = new Salesorders(salesorderId, customer.name, customer.accountRating, salesmanId, itemsHooverGo, itemsHooverClean, year);
         //add salesorder to list
         salesorders.push(salesorder);
-    }).then(() =>{});
+    };
     //returns all cleared Salesorders
     console.log(salesorders)
     return salesorders;
