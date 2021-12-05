@@ -14,9 +14,7 @@ export class EmployeeInfoPageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    /*this.emplInfo = new EmployeeInfo();
-    this.emplInfo.name = "Name";
-    this.emplInfo.department = "Dep"*/
+   
   }
 
 }

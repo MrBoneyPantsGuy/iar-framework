@@ -1,6 +1,7 @@
 export class SocialPerformanceEvaluation {
+  competence:string;
   targetValue!: number;
   actualValue!: number;
   bonus!: number;
-  average!: number[];
+  remark:string;
 }

@@ -1,4 +1,7 @@
 <h1>Bonus Computation</h1>
-<app-employee-info-page [year]="ye" [emplInfo]="info"></app-employee-info-page>
-<app-orders-evaluation></app-orders-evaluation>
-<app-social-performance-evaluation></app-social-performance-evaluation>
+<h2>Search employee</h2>
+<input type="text"/>
+<button>Search</button>
+<app-employee-info-page [year]="bonus.year" [emplInfo]="bonus.emplInfo"></app-employee-info-page>
+<app-orders-evaluation [orders]="bonus.partA"></app-orders-evaluation>
+<app-social-performance-evaluation [social]="bonus.partB"></app-social-performance-evaluation>

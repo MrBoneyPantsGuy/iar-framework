@@ -1,3 +1,4 @@
+import { Order } from './../components/bonus/models/order';
 import { EmployeeInfo } from '../components/bonus/models/employeeInfo';
 import { OrdersEvaluation } from '../components/bonus/models/ordersEvaluation';
 import {SocialPerformanceEvaluation} from '../components/bonus/models/socialPerformanceEvaluation';
@@ -5,7 +6,10 @@ import {SocialPerformanceEvaluation} from '../components/bonus/models/socialPerf
 export class Bonus {
   emplInfo: EmployeeInfo;
   year: string;
-  partA: OrdersEvaluation;
-  partB: SocialPerformanceEvaluation;
+  partA: Order[];
+  partB: SocialPerformanceEvaluation[];
   remarks: string;
+  totalBonusA:number;
+  totalBonusB:number;
+  remark:string;
 }

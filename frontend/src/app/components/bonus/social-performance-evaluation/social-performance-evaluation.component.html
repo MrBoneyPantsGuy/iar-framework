@@ -1,51 +1,19 @@
-<table>
+<table style="border: 1; border-style: solid;">
     <tr>
       <td></td>
       <td>Target Value</td>
       <td>Actual Value</td>
       <td>Bonus</td>
+      <td>Remark</td>
     </tr>
-    <tr>
-      <td>Leadership Competence</td>
+    <tr *ngFor="let item of social">
+      <td>{{item.competence}}</td>
   
-      <td></td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
+      <td>{{item.targetValue}}</td>
+      <td>{{item.actualValue}}</td>
+      <td>{{item.bonus}}</td>
+      <td>{{item.remark}}</td>
     </tr>
-    <tr>
-      <td>Openness to Employee</td>
-  
-      <td>Target Value</td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
-    </tr>
-    <tr>
-      <td>Social Behaviour to Employee</td>
-  
-      <td>Target Value</td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
-    </tr>
-    <tr>
-      <td>Attiude towards Client</td>
-  
-      <td>Target Value</td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
-    </tr>
-    <tr>
-      <td>Communication Skills</td>
-  
-      <td>Target Value</td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
-    </tr>
-    <tr>
-      <td>Integrity to Company</td>
-  
-      <td>Target Value</td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
-    </tr>
+   
   </table>
   
