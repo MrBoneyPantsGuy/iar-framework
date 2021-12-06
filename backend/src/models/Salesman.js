@@ -4,6 +4,7 @@
  * @param {string} firstname
  * @param {string} lastname
  * @param {string} employeeId
+ * @param {string} governmentId
  * @param {string} department
  */
 class Salesman{
@@ -12,8 +13,8 @@ class Salesman{
         this.firstname = firstname;
         this.lastname = lastname;
         this.employeeId = employeeId;
-        this.governmentId = governmentId;
         this.department = department;
+        this.governmentId = governmentId;
     }
 }
 
