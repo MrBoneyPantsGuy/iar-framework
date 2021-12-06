@@ -1,10 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is the description of this swaggerUI //TODO Sebastian Lysek, englische Beschreibung",
-    "version": "1.0.0",
+    "description": "API routes for PerformanceRecord management",
     "title": "SmartHoover Swagger of Sebastian Lysek, Luis Hohn and Sara Giernoth",
-    "description": "",
     "version": "1.0"
   },
   "produces": ["application/json"],
@@ -12,23 +10,23 @@
   "basePath": "/api",
   "tags": [{
     "name": "control",
-    "description": "Routes for testig orangeHRM and openCRX zugriffe"
+    "description": "Routes for testing orangeHRM and openCRX access"
   },
     {
       "name": "record",
-      "description": "Everything about PerformanceRecords"
+      "description": "CRUD implementation for performance records"
     },
     {
       "name": "salesman",
-      "description": "Everything about Salesman"
+      "description": "CRUD implementation for salesman with additional functionalities"
     },
     {
       "name": "user",
-      "description": "Everything about User"
+      "description": "Current user session status"
     },
     {
       "name": "login",
-      "description": "Everything about login"
+      "description": "Middleware authorization/login"
     }
   ],
   "schemes": [
@@ -40,7 +38,7 @@
         "tags": [
           "control"
         ],
-        "summary": "Get Employees from OrangeHRM",
+        "summary": "Get all employees from OrangeHRM",
         "operationId": "fetchEmployees",
         "consumes": [
           "application/json"
@@ -61,7 +59,7 @@
         "tags": [
           "control"
         ],
-        "summary": "Get bereinigte Salesorders from OpenCRX",
+        "summary": "Get sanitized Salesorders from OpenCRX",
         "operationId": "getAllSalesorders",
         "consumes": [
           "application/json"
@@ -82,7 +80,7 @@
         "tags": [
           "control"
         ],
-        "summary": "Get Customers from openCRX",
+        "summary": "Get customers from OpenCRX",
         "operationId": "getAllCustomers",
         "consumes": [
           "application/json"
@@ -267,7 +265,7 @@
         "tags": [
           "salesman"
         ],
-        "summary": "Update one Salesman",
+        "summary": "Update one Salesman by SalesmanId (DB primary key)",
         "operationId": "updateSalesman",
         "consumes": [
           "application/json"
@@ -307,7 +305,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Get self user",
+        "summary": "Get current user",
         "operationId": "getSelf",
         "consumes": [
           "application/json"
@@ -328,7 +326,7 @@
         "tags": [
           "login"
         ],
-        "summary": "Get Login status",
+        "summary": "Get login status",
         "operationId": "isLoggedIn",
         "consumes": [
           "application/json"
@@ -347,7 +345,7 @@
         "tags": [
           "login"
         ],
-        "summary": "Create a new Login",
+        "summary": "Create a new login",
         "operationId": "login",
         "consumes": [
           "application/json"
@@ -366,7 +364,7 @@
         "tags": [
           "login"
         ],
-        "summary": "Logout of Application",
+        "summary": "Logout of application",
         "operationId": "logout",
         "consumes": [
           "application/json"
