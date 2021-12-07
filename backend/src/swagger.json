@@ -258,6 +258,28 @@
             "description": "unauthorized"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Get all Salesman currently stored in the database",
+        "operationId": "getAllSalesman",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Array containing all salesman objects from MongoDb"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "Database currently has no salesman"
+          }
+        }
       }
     },
     "/salesman/{id}": {
