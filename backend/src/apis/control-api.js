@@ -6,15 +6,17 @@ const opencrxService = require('../services/opencrx-service');
 const dbService = require('../services/db-service');
 
 exports.fetchAllEmployees = async (req, res) => {
+    let result = [];
     let employees = await orangeService.getAllEmployees()
         .then(result => result.data)
         .then(employee => employee.forEach(entry => {
             let tmpSalesman = new Salesman(undefined, entry.firstName, entry.lastName, entry.employeeId, entry.unit, entry.code);
             if(tmpSalesman.department === 'Sales') {
                 dbService.storeSalesman(tmpSalesman);
+                result.push(tmpSalesman);
             }
         }));
-    res.status(200).send(employees);
+    res.status(200).send(result);
 }
 
 exports.getAllCustomers = async (req, res) => {
