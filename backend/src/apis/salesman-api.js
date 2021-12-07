@@ -35,7 +35,7 @@ exports.getAllSalesman = async (req, res) => {
 
    db.collection("personal").find({}).toArray( (err, result) => {
        if(err) throw err;
-       if(result === null) {
+       if(result.length === 0) {
            res.status(404).send("Database currently has no salesman.")
        } else {
            res.status(200).send(result)
