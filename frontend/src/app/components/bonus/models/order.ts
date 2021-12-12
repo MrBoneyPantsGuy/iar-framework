@@ -8,7 +8,5 @@ export class Order{
     remark:string;
     clientRankingText?: ClientRankingEnum
 
-    constructor(){
-        this.clientRankingText = this.clientRanking;
-    }
+   
 }

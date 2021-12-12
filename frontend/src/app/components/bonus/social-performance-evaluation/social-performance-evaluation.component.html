@@ -1,18 +1,19 @@
-<table style="border: 1; border-style: solid;">
+<h2>Social Performance Evaluation</h2>
+<table>
     <tr>
       <td></td>
-      <td>Target Value</td>
-      <td>Actual Value</td>
-      <td>Bonus</td>
-      <td>Remark</td>
+      <td class="rowTitle">Target Value</td>
+      <td class="rowTitle">Actual Value</td>
+      <td class="rowTitle">Bonus</td>
+      <td class="rowTitle">Remark</td>
     </tr>
     <tr *ngFor="let item of social">
-      <td>{{item.competence}}</td>
+      <td><input placeholder="{{item.competence}}" readonly/></td>
   
-      <td>{{item.targetValue}}</td>
-      <td>{{item.actualValue}}</td>
-      <td>{{item.bonus}}</td>
-      <td>{{item.remark}}</td>
+      <td><input placeholder="{{item.targetValue}}" readonly/></td>
+      <td><input placeholder="{{item.actualValue}}" readonly/></td>
+      <td><input placeholder="{{item.bonus}}"/></td>
+      <td><input placeholder="{{item.remark}}"/></td>
     </tr>
    
   </table>

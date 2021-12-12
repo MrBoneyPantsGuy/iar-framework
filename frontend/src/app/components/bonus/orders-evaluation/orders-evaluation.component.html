@@ -1,11 +1,12 @@
+<h2>Orders Evaluation</h2>
 <table  id="tableA">
   <tr>
-    <td>Name of Product</td>
-    <td>Client</td>
-    <td>Client Ranking</td>
-    <td>Items</td>
-    <td>Bonus</td>
-    <td>Remarks</td>
+    <td class="columnTitle">Name of Product</td>
+    <td class="columnTitle">Client</td>
+    <td class="columnTitle">Client Ranking</td>
+    <td class="columnTitle">Items</td>
+    <td class="columnTitle">Bonus</td>
+    <td class="columnTitle">Remarks</td>
   </tr>
   <tr *ngFor="let item of orders">
     <td><input type="text" readonly placeholder="{{item.productname}}"></td>

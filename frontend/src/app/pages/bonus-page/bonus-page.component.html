@@ -1,7 +1,17 @@
 <h1>Bonus Computation</h1>
 <h2>Search employee</h2>
 <input type="text"/>
-<button>Search</button>
+<button id="searchBtn">Search</button>
 <app-employee-info-page [year]="bonus.year" [emplInfo]="bonus.emplInfo"></app-employee-info-page>
+<hr>
 <app-orders-evaluation [orders]="bonus.partA"></app-orders-evaluation>
+<h3>Total Bonus A</h3>
+<hr>
 <app-social-performance-evaluation [social]="bonus.partB"></app-social-performance-evaluation>
+<h3>Total Bonus B</h3>
+<hr>
+<h2>Remarks</h2>
+<textarea></textarea>
+<hr>
+<h3>Total Bonus A+B</h3>
+<hr>

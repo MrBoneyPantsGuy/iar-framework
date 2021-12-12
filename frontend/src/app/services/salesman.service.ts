@@ -15,12 +15,9 @@ export class SalesmanService {
   guard: AuthGuardService;
   constructor(http:HttpClient) { this.client=http;}
 
-    getSalesmanByEmployeeId(id:string):Observable<HttpResponse<Salesman>>{
-    //const header = new Headers({'Authorization':`Bearer `})
-    return  this.client.get<Salesman>('api/salesman/employeeid/'+id, {observe: 'response'});
-   
-   
-  }
+    getSalesmanByEmployeeId(id:string):Observable<HttpResponse<Salesman>>{  return  this.client.get<Salesman>('api/salesman/employeeid/'+id, {observe: 'response'})};
+    getSalesmans():Observable<HttpResponse<Salesman[]>>{  return  this.client.get<Salesman[]>('api/salesman/', {observe: 'response'})};
+  
 
  
 }

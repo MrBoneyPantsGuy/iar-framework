@@ -1,0 +1,11 @@
+table{
+    border-style:solid ;
+    width: 20em;
+    margin-top: 2em;
+}
+.rowTitle{
+    font-weight: bold;
+}
+input{
+    margin: 1em 1em;
+}

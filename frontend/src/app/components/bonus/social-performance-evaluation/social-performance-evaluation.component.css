@@ -1,0 +1,10 @@
+h2{
+    margin-top: 2em;
+}
+table{
+    border-style: solid;
+}
+input:read-only{
+    border: none;
+}
+.rowTitle{font-weight: bold;}
