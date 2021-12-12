@@ -1,22 +1,405 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "",
-    "description": "",
+    "description": "API routes for PerformanceRecord management",
+    "title": "SmartHoover Swagger of Sebastian Lysek, Luis Hohn and Sara Giernoth",
     "version": "1.0"
   },
   "produces": ["application/json"],
   "host": "localhost:8080",
-  "basePath": "/api/control",
+  "basePath": "/api",
+  "tags": [{
+    "name": "control",
+    "description": "Routes for testing orangeHRM and openCRX access"
+  },
+    {
+      "name": "record",
+      "description": "CRUD implementation for performance records"
+    },
+    {
+      "name": "salesman",
+      "description": "CRUD implementation for salesman with additional functionalities"
+    },
+    {
+      "name": "user",
+      "description": "Current user session status"
+    },
+    {
+      "name": "login",
+      "description": "Middleware authorization/login"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
   "paths": {
-    "/fetchemployees": {
+    "/control/fetchemployees": {
       "get": {
-        "x-swagger-router-controller": "middleware-name1",
-        "operationId": "swagTest",
-        "tags": ["/test"],
-        "description": "",
+        "tags": [
+          "control"
+        ],
+        "summary": "Get all employees from OrangeHRM",
+        "operationId": "fetchEmployees",
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/control/getallsalesorders": {
+      "get": {
+        "tags": [
+          "control"
+        ],
+        "summary": "Get sanitized Salesorders from OpenCRX",
+        "operationId": "getAllSalesorders",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/control/getallcustomers": {
+      "get": {
+        "tags": [
+          "control"
+        ],
+        "summary": "Get customers from OpenCRX",
+        "operationId": "getAllCustomers",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/record/{id}": {
+      "get": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Get one PerformanceRecord by RecordId (DB primary key)",
+        "operationId": "getRecordById",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Update one PerformanceRecord by RecordId (DB primary key)",
+        "operationId": "updateRecordById",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Delete one PerformanceRecord by RecordId (DB primary key)",
+        "operationId": "deleteRecordById",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/record": {
+      "post": {
+        "tags": [
+          "record"
+        ],
+        "summary": "Get all PerformanceRecords",
+        "operationId": "getAllRecords",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/salesman/id/{id}": {
+      "get": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Get one Salesman by SalesmanId (DB primary key)",
+        "operationId": "getSalesmanBySalesmanId",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/salesman/employeeId/{id}": {
+      "get": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Get one Salesman by EmployeeId",
+        "operationId": "getSalesmanByEmployeeId",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/salesman/query/{attribute}/{key}": {
+      "get": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Query Salesman by attribute-key pair",
+        "operationId": "querySalesman",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/salesman": {
+      "post": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Create one Salesman",
+        "operationId": "createSalesman",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Get all Salesman currently stored in the database",
+        "operationId": "getAllSalesman",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Array containing all salesman objects from MongoDb"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "404": {
+            "description": "Database currently has no salesman"
+          }
+        }
+      }
+    },
+    "/salesman/{id}": {
+      "put": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Update one Salesman by SalesmanId (DB primary key)",
+        "operationId": "updateSalesman",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "salesman"
+        ],
+        "summary": "Delete one Salesman by salesmanId (DB primary key)",
+        "operationId": "deleteSalesman",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get current user",
+        "operationId": "getSelf",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Get login status",
+        "operationId": "isLoggedIn",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Create a new login",
+        "operationId": "login",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Logout of application",
+        "operationId": "logout",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        }
       }
     }
   }
