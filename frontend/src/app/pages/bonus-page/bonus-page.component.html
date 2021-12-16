@@ -1,7 +1,15 @@
 <h1>Bonus Computation</h1>
 <h2>Search employee</h2>
-<input type="text"/>
+<input type="text"  id="searchInput"  (input)="search($event.target.value)" placeholder="Type to start searching..."/>
 <button id="searchBtn">Search</button>
+<!--<ng-container *ngIf="(filteredSalesman | async) as filteredSalesman">-->
+    <p>Available Employees</p>
+    <ul>
+      <li *ngFor="let item of filteredSalesman">
+        {{item.firstname}},{{item.lastname}},{{item.employeeId}}
+      </li>
+    </ul>
+  <!--</ng-container>-->
 <app-employee-info-page [year]="bonus.year" [emplInfo]="bonus.emplInfo"></app-employee-info-page>
 <hr>
 <app-orders-evaluation [orders]="bonus.partA"></app-orders-evaluation>

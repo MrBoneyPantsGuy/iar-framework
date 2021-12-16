@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { logging } from 'protractor';
 import { HttpClient } from '@angular/common/http';
 import { SalesmanService } from './../../services/salesman.service';
@@ -8,7 +9,9 @@ import { OrdersEvaluation } from 'src/app/components/bonus/models/ordersEvaluati
 import { SocialPerformanceEvaluation } from 'src/app/components/bonus/models/socialPerformanceEvaluation';
 import { Order } from 'src/app/components/bonus/models/order';
 import {Salesman} from "../../../../../backend/src/models/Salesman.js";
-import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { Console } from 'console';
+
+ 
 const sale = require('../../../../../backend/src/models/Salesman.js');
 
 
@@ -21,7 +24,8 @@ export class BonusPageComponent implements OnInit {
   bonus: Bonus;
   salesmanservice: SalesmanService;
   salesman:Salesman;
-  allsalesman:Salesman[]
+  allsalesman:Salesman[];
+  filteredSalesman:Salesman[];
 
   //TODO fetch Infos from backnd
   constructor(http:HttpClient) {
@@ -29,15 +33,19 @@ export class BonusPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-   
+    
     this.allsalesman = [];
+    this.filteredSalesman = [];
+    
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
     this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("31").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman.push(await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;}));
-    console.log(this.allsalesman[0]);
+    //console.log(this.allsalesman[0]);
     
     
-    debugger;
+    
+    
+  
     this.bonus = new Bonus();
     this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname,this.salesman.employeeId,this.salesman.department);
     this.bonus.partA = [];
@@ -61,6 +69,17 @@ export class BonusPageComponent implements OnInit {
     s.competence = "Leader";
     this.bonus.partB.push(s);
     //this.info = this.bonus.emplInfo;
+  }
+
+   search(searchtext:string){
+    this.filteredSalesman = this.allsalesman[0].filter(x=>x.firstname.includes(searchtext));
+    if(this.filteredSalesman.length == 1){
+      this.salesman = this.filteredSalesman[0];
+      debugger;
+      console.log(this.salesman.firstname);
+      this.bonus.emplInfo.name = this.salesman.firstname;
+    }
+    
   }
  
 }
