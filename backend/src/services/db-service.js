@@ -5,7 +5,7 @@ const uri = 'mongodb://localhost:27017'
 const client = new MongoClient(uri);
 const PerformanceRecord = require('../models/PerformanceRecord');
 const SocialRecord = require('../models/SocialRecord');
-const OrdersRecord = require('../models/OrdersRecord');
+const OrdersRecord = require('../models/OrderRecord');
 
 exports.storeSalesman = async (salesman) => {
     try {

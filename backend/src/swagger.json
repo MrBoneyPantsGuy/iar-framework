@@ -45,11 +45,20 @@
         ],
         "parameters": [],
         "responses": {
-          "201": {
-            "description": "successful"
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Salesman"
+              }
+            }
           },
           "401": {
             "description": "unauthorized"
+          },
+          "500": {
+            "description": "interner Server error"
           }
         }
       }
@@ -66,11 +75,20 @@
         ],
         "parameters": [],
         "responses": {
-          "201": {
-            "description": "successful"
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Salesorder"
+              }
+            }
           },
           "401": {
             "description": "unauthorized"
+          },
+          "500": {
+            "description": "interner Server error"
           }
         }
       }
@@ -87,11 +105,20 @@
         ],
         "parameters": [],
         "responses": {
-          "201": {
-            "description": "successful"
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customers"
+              }
+            }
           },
           "401": {
             "description": "unauthorized"
+          },
+          "500": {
+            "description": "interner Server error"
           }
         }
       }
@@ -106,13 +133,31 @@
         "consumes": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Die ID des Records der geliefert werden soll",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "responses": {
-          "201": {
-            "description": "successful"
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/PerformanceRecord"
+              }
+            }
           },
           "401": {
             "description": "unauthorized"
+          },
+          "500": {
+            "description": "interner Server error"
           }
         }
       },
@@ -125,13 +170,37 @@
         "consumes": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Die ID des Records der geändert werden soll",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Das Record, dass alle Änderungen enthält",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/PerformanceRecord"
+              }
+            }
+          }
+        ],
         "responses": {
-          "201": {
+          "200": {
             "description": "successful"
           },
           "401": {
             "description": "unauthorized"
+          },
+          "500": {
+            "description": "interner Server error"
           }
         }
       },
@@ -144,13 +213,25 @@
         "consumes": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Die ID des Records der gelöscht werden soll",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "responses": {
-          "201": {
+          "200": {
             "description": "successful"
           },
           "401": {
             "description": "unauthorized"
+          },
+          "500": {
+            "description": "interner Server error"
           }
         }
       }
@@ -160,12 +241,22 @@
         "tags": [
           "record"
         ],
-        "summary": "Get all PerformanceRecords",
-        "operationId": "getAllRecords",
+        "summary": "Add a PerformanceRecord",
+        "operationId": "createPerformanceRecord",
         "consumes": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Performance Record object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PerformanceRecord"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "successful"
@@ -400,6 +491,219 @@
             "description": "unauthorized"
           }
         }
+      }
+    }
+  },
+  "definitions": {
+    "Salesman": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "the database primary key"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "employeeId": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "governmentId": {
+          "type": "string",
+          "description": "primary key of openCRX"
+        }
+      },
+      "xml": {
+        "name": "Salesman"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "the database primary key"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "SocialRecord": {
+      "type": "object",
+      "properties": {
+        "competence": {
+          "type": "string"
+        },
+        "targetValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "actualValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bonus": {
+          "type": "number"
+        },
+        "remark": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "SocialRecord"
+      }
+    },
+    "Salesorder": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "primary key of openCRX"
+        },
+        "customername": {
+          "type": "string"
+        },
+        "clientRankingNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "governmentId": {
+          "type": "string"
+        },
+        "itemsHooverGo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "itemsHooverClean": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "xml": {
+        "name": "Salesorder"
+      }
+    },
+    "PerformanceRecord": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "primary key of database"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "employeeId": {
+          "type": "string"
+        },
+        "socialRecords": {
+          "type": "array"
+        },
+        "orderRecords": {
+          "type": "array"
+        },
+        "totalBonusA": {
+          "type": "number"
+        },
+        "totalBonusB": {
+          "type": "number"
+        },
+        "remark": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "PerformanceRecord"
+      }
+    },
+    "OrderRecord": {
+      "type": "object",
+      "properties": {
+        "productname": {
+          "type": "string"
+        },
+        "client": {
+          "type": "string"
+        },
+        "clientRanking": {
+          "type": "string"
+        },
+        "itemsSold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bonus": {
+          "type": "number"
+        },
+        "remark": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "OrderRecord"
+      }
+    },
+    "Customers": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "primary key of openCRX"
+        },
+        "name": {
+          "type": "string"
+        },
+        "accountRating": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "xml": {
+        "name": "Customers"
+      }
+    },
+    "Credentials": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Credentials"
       }
     }
   }
