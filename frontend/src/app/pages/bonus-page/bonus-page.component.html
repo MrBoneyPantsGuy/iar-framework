@@ -1,7 +1,7 @@
 <h1>Bonus Computation</h1>
 <h2>Search employee</h2>
 <input type="text"  id="searchInput"  (input)="search($event.target.value)" placeholder="Type to start searching..."/>
-<button id="searchBtn">Search</button>
+
 <!--<ng-container *ngIf="(filteredSalesman | async) as filteredSalesman">-->
     <p>Available Employees</p>
     <ul>
@@ -10,6 +10,14 @@
       </li>
     </ul>
   <!--</ng-container>-->
+  <label for="yearOfPerfomance">Previous Bonus:</label>
+ <select name="yearOfPerfomance" id="yearOfPerfomance" (change)="changedYear($event.target.value)">
+   
+   <ng-container *ngFor="let item of bonusYears">
+      <option value="{{item}}">{{item}}</option>
+   </ng-container>
+   
+ </select>
 <app-employee-info-page [year]="bonus.year" [emplInfo]="bonus.emplInfo"></app-employee-info-page>
 <hr>
 <app-orders-evaluation [orders]="bonus.partA"></app-orders-evaluation>

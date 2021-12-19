@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ClientRankingEnum } from '../models/clientRankingEnum';
 import { OrdersEvaluation } from '../models/ordersEvaluation';
-import { Order } from '../models/order';
+import {OrdersRecord} from "../../../../../../backend/src/models/OrdersRecord.js";
 @Component({
   selector: 'app-orders-evaluation',
   templateUrl: './orders-evaluation.component.html',
@@ -10,9 +10,10 @@ import { Order } from '../models/order';
 export class OrdersEvaluationComponent implements OnInit {
   clientRankings = ClientRankingEnum;
   enumKeys:any[];
-  @Input() orders: Order[];
+  @Input() orders: OrdersRecord[];
   constructor() {
-   
+    this.orders =[];
+   console.log(this.orders);
   }
 
 

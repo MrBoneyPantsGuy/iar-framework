@@ -1,3 +1,4 @@
+import { OrderService } from './../../services/order.service';
 import { Observable } from 'rxjs';
 import { logging } from 'protractor';
 import { HttpClient } from '@angular/common/http';
@@ -10,10 +11,11 @@ import { SocialPerformanceEvaluation } from 'src/app/components/bonus/models/soc
 import { Order } from 'src/app/components/bonus/models/order';
 import {Salesman} from "../../../../../backend/src/models/Salesman.js";
 import { Console } from 'console';
-
+import {OrdersRecord} from "../../../../../backend/src/models/OrdersRecord.js";
+import { asLiteral } from '@angular/compiler/src/render3/view/util';
  
 const sale = require('../../../../../backend/src/models/Salesman.js');
-
+const ord = require('../../../../../backend/src/models/OrdersRecord.js');
 
 @Component({
   selector: 'app-bonus-page',
@@ -23,47 +25,59 @@ const sale = require('../../../../../backend/src/models/Salesman.js');
 export class BonusPageComponent implements OnInit {
   bonus: Bonus;
   salesmanservice: SalesmanService;
+  orderservice: OrderService;
   salesman:Salesman;
   allsalesman:Salesman[];
   filteredSalesman:Salesman[];
+  orders:OrdersRecord[];
+  bonusYears:number[];
 
   //TODO fetch Infos from backnd
   constructor(http:HttpClient) {
     this.salesmanservice = new SalesmanService(http);
+    this.orderservice = new OrderService(http);
   }
 
   async ngOnInit() {
-    
+    this.bonusYears = [];
+    this.orders = [];
     this.allsalesman = [];
     this.filteredSalesman = [];
     
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
-    this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("31").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
+    this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("84").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman.push(await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;}));
+    this.orders = await this.orderservice.getOrdersRecord().toPromise().then(x=>{return x.body;});
     //console.log(this.allsalesman[0]);
     
     
     
     
-  
+    //debugger;
     this.bonus = new Bonus();
-    this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname,this.salesman.employeeId,this.salesman.department);
-    this.bonus.partA = [];
+    this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
+    console.log(this.orders);
+    
+    this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
+    var latest = this.latestYear(this.bonus.partA,);
+    debugger;
+    this.bonus.partA = this.bonus.partA.filter(x=>x.year == ""+latest);
+    debugger;
     this.bonus.partB = [];
     
-    this.bonus.year = "2021";
+    this.bonus.year = ""+latest;
     //Employee Infos
     //this.bonus.emplInfo.name = "bp";
 
     //PartA
-    var ord = new Order();
+   /* var ord = new Order();
     var b = new Order();
     
     ord.client = "Client A";
     ord.clientRanking = 1;
     b.itemsSold = "5";
     this.bonus.partA.push(ord);
-    this.bonus.partA.push(b);
+    this.bonus.partA.push(b);*/
     //PartB
     var s = new SocialPerformanceEvaluation();
     s.competence = "Leader";
@@ -77,9 +91,40 @@ export class BonusPageComponent implements OnInit {
       this.salesman = this.filteredSalesman[0];
       debugger;
       console.log(this.salesman.firstname);
-      this.bonus.emplInfo.name = this.salesman.firstname;
+      //this.bonus.emplInfo.name = this.salesman.firstname;
+      this.updateUI();
     }
+
+   
+  
+  }
+
+  latestYear(year:string[],x:number=2000){
     
+    year.forEach(y=>{
+      var yearNumber = Number.parseInt(y["year"]);
+      this.bonusYears.push(yearNumber);
+      debugger;
+      if(yearNumber>x)
+        x=yearNumber
+    });
+    this.bonusYears = [...new Set(this.bonusYears)].sort((a,b)=>b-a);
+    debugger;
+    
+     return x; 
+  }
+  changedYear(selected:number){
+    //alert(selected);
+    this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId).filter(x=>x.year == ""+selected);
+    this.bonus.year = ""+selected;
+  }
+  updateUI(){
+      this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
+      this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
+      var latest = this.latestYear(this.bonus.partA,);
+      debugger;
+      this.bonus.partA = this.bonus.partA.filter(x=>x.year == ""+latest);
+      this.bonus.year = ""+latest;
   }
  
 }
