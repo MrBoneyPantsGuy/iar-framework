@@ -28,8 +28,8 @@ describe('Performance Record Api', () => {
                     body.data.totalBonusA.should.eql(0);
                     body.data.totalBonusB.should.eql(0);
                     body.data.remark.should.eql('');
-                    done();
                 });
+                done();
             });
             it('should throw an error if the record does not exist', (done) => {
                 request.get(`${baseUrl}/record/999999`, (err, res, body) => {
@@ -38,8 +38,9 @@ describe('Performance Record Api', () => {
                     body = JSON.parse(body);
                     body.status.should.eql('error');
                     body.message.should.eql('That record does not exist.');
-                    done();
+
                 })
+                done();
             })
         });
     });
