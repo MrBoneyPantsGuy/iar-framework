@@ -128,7 +128,7 @@
         "tags": [
           "record"
         ],
-        "summary": "Get one PerformanceRecord by RecordId (DB primary key)",
+        "summary": "Get one PerformanceRecord by EmployeeId",
         "operationId": "getRecordById",
         "consumes": [
           "application/json"
@@ -137,7 +137,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Die ID des Records der geliefert werden soll",
+            "description": "Die ID des Mitarbeiters dessen Record geliefert werden soll",
             "required": true,
             "type": "integer",
             "format": "int32"
