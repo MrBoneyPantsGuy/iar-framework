@@ -2,14 +2,13 @@
 <h2>Search employee</h2>
 <input type="text"  id="searchInput"  (input)="search($event.target.value)" placeholder="Type to start searching..."/>
 
-<!--<ng-container *ngIf="(filteredSalesman | async) as filteredSalesman">-->
+
     <p>Available Employees</p>
     <ul>
       <li *ngFor="let item of filteredSalesman">
-        {{item.firstname}},{{item.lastname}},{{item.employeeId}}
+        {{item.firstname}}, {{item.lastname}}, {{item.employeeId}}
       </li>
     </ul>
-  <!--</ng-container>-->
   <label for="yearOfPerfomance">Previous Bonus:</label>
  <select name="yearOfPerfomance" id="yearOfPerfomance" (change)="changedYear($event.target.value)">
    
