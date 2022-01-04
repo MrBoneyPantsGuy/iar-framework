@@ -1,3 +1,4 @@
+import { PerformanceRecordService } from './../../services/performance-record.service';
 import { OrderService } from './../../services/order.service';
 import { Observable } from 'rxjs';
 import { logging } from 'protractor';
@@ -12,6 +13,7 @@ import { Order } from 'src/app/components/bonus/models/order';
 import {Salesman} from "../../../../../backend/src/models/Salesman.js";
 import { Console } from 'console';
 import {OrdersRecord} from "../../../../../backend/src/models/OrdersRecord.js";
+import {PerformanceRecord} from "../../../../../backend/src/models/PerformanceRecord.js";
 import { asLiteral } from '@angular/compiler/src/render3/view/util';
  
 const sale = require('../../../../../backend/src/models/Salesman.js');
@@ -23,49 +25,56 @@ const ord = require('../../../../../backend/src/models/OrdersRecord.js');
   styleUrls: ['./bonus-page.component.css']
 })
 export class BonusPageComponent implements OnInit {
-  bonus: Bonus;
+ // bonus: Bonus;
   salesmanservice: SalesmanService;
-  orderservice: OrderService;
+  //orderservice: OrderService;
   salesman:Salesman;
   allsalesman:Salesman[];
   filteredSalesman:Salesman[];
   orders:OrdersRecord[];
   bonusYears:number[];
-
+  recordService:PerformanceRecordService;
+  record:PerformanceRecord;
+  records:PerformanceRecord[];
+  year:number;
   //TODO fetch Infos from backnd
   constructor(http:HttpClient) {
     this.salesmanservice = new SalesmanService(http);
-    this.orderservice = new OrderService(http);
+    //this.orderservice = new OrderService(http);
+    this.recordService = new PerformanceRecordService(http);
   }
 
   async ngOnInit() {
     this.bonusYears = [];
-    this.orders = [];
+    //this.orders = [];
     this.allsalesman = [];
     this.filteredSalesman = [];
-    
+    this.records = [];
+    this.year = 0;
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
-    this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("84").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
+    this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("9").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman.push(await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;}));
-    this.orders = await this.orderservice.getOrdersRecord().toPromise().then(x=>{return x.body;});
+    //this.orders = await this.orderservice.getOrdersRecord().toPromise().then(x=>{return x.body;});
+    this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;})
+    console.log(this.records);
     //console.log(this.allsalesman[0]);
     
     
     
     
+    debugger;
+   // this.bonus = new Bonus();
+    //this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
+    
+    
+   // this.record.ordersRecords = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
+    this.year  = this.latestYear(this.records,);
     //debugger;
-    this.bonus = new Bonus();
-    this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
-    console.log(this.orders);
-    
-    this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
-    var latest = this.latestYear(this.bonus.partA,);
+    this.record = this.records.find(x=>x.year == ""+this.year);
     debugger;
-    this.bonus.partA = this.bonus.partA.filter(x=>x.year == ""+latest);
-    debugger;
-    this.bonus.partB = [];
+    //this.bonus.partB = [];
     
-    this.bonus.year = ""+latest;
+//    this.year = latest;
     //Employee Infos
     //this.bonus.emplInfo.name = "bp";
 
@@ -79,9 +88,10 @@ export class BonusPageComponent implements OnInit {
     this.bonus.partA.push(ord);
     this.bonus.partA.push(b);*/
     //PartB
-    var s = new SocialPerformanceEvaluation();
+    /*var s = new SocialPerformanceEvaluation();
     s.competence = "Leader";
-    this.bonus.partB.push(s);
+    this.bonus.partB.push(s);*/
+    
     //this.info = this.bonus.emplInfo;
   }
 
@@ -99,32 +109,35 @@ export class BonusPageComponent implements OnInit {
   
   }
 
-  latestYear(year:string[],x:number=2000){
+  latestYear(records:PerformanceRecord[],x:number=2000){
     
-    year.forEach(y=>{
-      var yearNumber = Number.parseInt(y["year"]);
+    records.forEach(y=>{
+      var yearNumber = Number.parseInt(y.year);
       this.bonusYears.push(yearNumber);
       debugger;
       if(yearNumber>x)
         x=yearNumber
     });
     this.bonusYears = [...new Set(this.bonusYears)].sort((a,b)=>b-a);
-    debugger;
+    //debugger;
     
      return x; 
   }
   changedYear(selected:number){
     //alert(selected);
-    this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId).filter(x=>x.year == ""+selected);
-    this.bonus.year = ""+selected;
+    this.record = this.records.filter(x=>x.year == ""+selected);
+    this.year = selected;
   }
-  updateUI(){
-      this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
+  async updateUI(){
+     /* this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
       this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
-      var latest = this.latestYear(this.bonus.partA,);
+      var latest = this.latestYear(this.bonus.partA,);*/
       debugger;
-      this.bonus.partA = this.bonus.partA.filter(x=>x.year == ""+latest);
-      this.bonus.year = ""+latest;
+      
+      this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
+      this.year = this.latestYear(this.records,)
+      this.record = this.records.find(x=>x.year == ""+this.year);
+      
   }
  
 }

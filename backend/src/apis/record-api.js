@@ -5,7 +5,7 @@ exports.getRecordById = async (req, res) => {
     const db = req.app.get('db');
     const id = req.params["id"];
 
-    db.collection('record').findOne({"employeeId": id}, (err, result) => {
+    db.collection('record').find({"employeeId": id}).toArray((err, result) => {
         if(err) throw err;
         if(result === null) {
             res.status(404).send('Record not found');
@@ -18,7 +18,7 @@ exports.getRecordById = async (req, res) => {
 exports.createRecord = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
-    const performanceRecord = new PerformanceRecord(undefined, data.salesmanId, data.socialRecords.split(";"), data.ordersRecords.split(";"), data.totalBonusA, data.totalBonusB, data.remark);
+    const performanceRecord = new PerformanceRecord(undefined, data.year,data.salesmanId, data.socialRecords.split(";"), data.ordersRecords.split(";"), data.totalBonusA, data.totalBonusB, data.remark);
 
     db.collection('record').insertOne(performanceRecord, (err) => {
         if (err) res.status(500).send(err);

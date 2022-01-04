@@ -18,16 +18,16 @@
    </ng-container>
    
  </select>
-<app-employee-info-page [year]="bonus.year" [emplInfo]="bonus.emplInfo"></app-employee-info-page>
+<app-employee-info-page [year]="year" [emplInfo]="salesman"></app-employee-info-page>
 <hr>
-<app-orders-evaluation [orders]="bonus.partA"></app-orders-evaluation>
-<h3>Total Bonus A</h3>
+<app-orders-evaluation [orders]="record.ordersRecords"></app-orders-evaluation>
+<h3>Total Bonus A: {{record.totalBonusA}}</h3>
 <hr>
-<app-social-performance-evaluation [social]="bonus.partB"></app-social-performance-evaluation>
-<h3>Total Bonus B</h3>
+<app-social-performance-evaluation [social]="record.socialRecords"></app-social-performance-evaluation>
+<h3>Total Bonus B: {{record.totalBonusB}}</h3>
 <hr>
 <h2>Remarks</h2>
-<textarea></textarea>
+<textarea>{{record.remark}}</textarea>
 <hr>
 <h3>Total Bonus A+B</h3>
 <hr>

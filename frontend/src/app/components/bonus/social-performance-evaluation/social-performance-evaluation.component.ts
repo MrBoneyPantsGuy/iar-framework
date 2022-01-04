@@ -1,5 +1,6 @@
 import { SocialPerformanceEvaluation } from './../models/socialPerformanceEvaluation';
 import { Component, OnInit,Input } from '@angular/core';
+import {SocialRecord} from "../../../../../../backend/src/models/SocialRecord.js";
 
 @Component({
   selector: 'app-social-performance-evaluation',
@@ -7,9 +8,9 @@ import { Component, OnInit,Input } from '@angular/core';
   styleUrls: ['./social-performance-evaluation.component.css']
 })
 export class SocialPerformanceEvaluationComponent implements OnInit {
-  @Input() social: SocialPerformanceEvaluation[];
+  @Input() social: SocialRecord[];
   constructor() {
-    this.social = [];
+    
     /*var s = new SocialPerformanceEvaluation();
     s.competence = "Leader";
     this.social.push(s);*/

@@ -9,9 +9,9 @@
     <td class="columnTitle">Remarks</td>
   </tr>
 <ng-container *ngFor="let item of orders">
-  <tr *ngIf="item.itemsHooverClean != undefined">
+  <!--<tr *ngIf="item.itemsHooverClean != undefined">
     <td><input type="text" readonly placeholder="Hoover Clean"></td>
-    <td><input type="text" readonly placeholder="{{item.customername}}"/></td>
+    <td><input type="text" readonly placeholder="{{item.client}}"/></td>
     <td><input type="text"readonly placeholder="{{item.clientRankingNumber}}"/></td>  
     <td ><input type="text" readonly placeholder="{{item.itemsHooverClean/1}}"/></td>
     <td><input type="text" [bonus]="remarks"/></td>
@@ -24,14 +24,14 @@
     <td ><input type="text" readonly placeholder="{{item.itemsHooverGo/1}}"/></td>
     <td><input type="text" [bonus]="remarks"/></td>
     <td><input type="text" /></td>
-  </tr>
+  </tr>-->
   <tr *ngIf="item.itemsHooverGo == undefined && item.itemsHooverClean == undefined">
-    <td><input type="text" readonly placeholder=""></td>
-    <td><input type="text" readonly placeholder="{{item.customername}}"/></td>
-    <td><input type="text"readonly placeholder="{{item.clientRankingNumber}}"/></td>  
-    <td ><input type="text" readonly placeholder="{{item.itemsHooverGo/1}}"/></td>
-    <td><input type="text" [bonus]="remarks"/></td>
-    <td><input type="text" /></td>
+    <td><input type="text" readonly placeholder="{{item.productname}}"></td>
+    <td><input type="text" readonly placeholder="{{item.client}}"/></td>
+    <td><input type="text"readonly placeholder="{{item.clientRanking}}"/></td>  
+    <td ><input type="text" readonly placeholder="{{item.itemsSold/1}}"/></td>
+    <td><input type="text" [(bonus)]="bonus"/></td>
+    <td><input type="text" [(remark)]="remark"/></td>
   </tr>
 </ng-container>
 </table>

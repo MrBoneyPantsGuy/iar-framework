@@ -13,7 +13,7 @@ export class SocialService {
   constructor(http:HttpClient) { this.client=http;}
 
     //getSalesmanByEmployeeId(id:string):Observable<HttpResponse<OrdersRecord>>{  return  this.client.get<OrdersRecord>('api/salesman/employeeid/'+id, {observe: 'response'})};
-    getPerformanceRecord(id:string):Observable<HttpResponse<PerformanceRecord>>{  return  this.client.get<PerformanceRecord>('api/record/'+id, {observe: 'response'})};
+    getPerformanceRecord(id:string):Observable<HttpResponse<PerformanceRecord[]>>{  return  this.client.get<PerformanceRecord[]>('api/record/'+id, {observe: 'response'})};
   
 
  

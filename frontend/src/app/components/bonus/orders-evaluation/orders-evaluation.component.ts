@@ -12,8 +12,7 @@ export class OrdersEvaluationComponent implements OnInit {
   enumKeys:any[];
   @Input() orders: OrdersRecord[];
   constructor() {
-    this.orders =[];
-   console.log(this.orders);
+   
   }
 
 
