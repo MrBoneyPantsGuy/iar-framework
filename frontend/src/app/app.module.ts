@@ -17,6 +17,10 @@ import {MatIconModule} from "@angular/material/icon";
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { ExamplePageComponent } from './pages/example-page/example-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { EmployeeInfoPageComponent } from './components/bonus/employee-info-page/employee-info-page.component';
+import { OrdersEvaluationComponent } from './components/bonus/orders-evaluation/orders-evaluation.component';
+import { SocialPerformanceEvaluationComponent } from './components/bonus/social-performance-evaluation/social-performance-evaluation.component';
+import { BonusPageComponent } from './pages/bonus-page/bonus-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     LandingPageComponent,
     MenuBarComponent,
     ExamplePageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    EmployeeInfoPageComponent,
+    OrdersEvaluationComponent,
+    SocialPerformanceEvaluationComponent,
+    BonusPageComponent
   ],
   imports: [
     BrowserModule,
