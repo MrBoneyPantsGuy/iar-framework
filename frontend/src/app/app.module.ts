@@ -21,6 +21,8 @@ import { EmployeeInfoPageComponent } from './components/bonus/employee-info-page
 import { OrdersEvaluationComponent } from './components/bonus/orders-evaluation/orders-evaluation.component';
 import { SocialPerformanceEvaluationComponent } from './components/bonus/social-performance-evaluation/social-performance-evaluation.component';
 import { BonusPageComponent } from './pages/bonus-page/bonus-page.component';
+import {MatListModule} from "@angular/material/list";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { BonusPageComponent } from './pages/bonus-page/bonus-page.component';
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
