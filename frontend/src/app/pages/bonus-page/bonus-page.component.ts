@@ -48,13 +48,12 @@ export class BonusPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    debugger;
+   
     
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
     this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("9").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman = await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;});
     this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
-    debugger;
     console.log(this.records);
 
   }
@@ -63,7 +62,6 @@ export class BonusPageComponent implements OnInit {
     this.filteredSalesman = this.allsalesman.filter(x=>x.firstname.includes(searchtext));
     if(this.filteredSalesman.length == 1){
       this.salesman = this.filteredSalesman[0];
-      debugger;
        this.updateUI();
      
       
@@ -93,10 +91,8 @@ export class BonusPageComponent implements OnInit {
       this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
       if(!yearIsSet)
         this.year = ""+this.latestYear(this.records,);
-      debugger;
       if(this.records.length > 0)
         this.record = this.records.find(x=>x.year == this.year);
-      debugger;
     }
 
 }
