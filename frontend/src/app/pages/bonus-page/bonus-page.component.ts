@@ -10,14 +10,13 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { OrdersEvaluation } from 'src/app/components/bonus/models/ordersEvaluation';
 import { SocialPerformanceEvaluation } from 'src/app/components/bonus/models/socialPerformanceEvaluation';
 import { Order } from 'src/app/components/bonus/models/order';
-import {Salesman} from "../../../../../backend/src/models/Salesman.js";
+import {Salesman} from '../../../../../backend/src/models/Salesman.js';
 import { Console } from 'console';
-import {OrdersRecord} from "../../../../../backend/src/models/OrdersRecord.js";
-import {PerformanceRecord} from "../../../../../backend/src/models/PerformanceRecord.js";
+import {OrdersRecord} from '../../../../../backend/src/models/OrderRecord.js';
+import {PerformanceRecord} from '../../../../../backend/src/models/PerformanceRecord.js';
 import { asLiteral } from '@angular/compiler/src/render3/view/util';
- 
+
 const sale = require('../../../../../backend/src/models/Salesman.js');
-const ord = require('../../../../../backend/src/models/OrdersRecord.js');
 
 @Component({
   selector: 'app-bonus-page',
@@ -37,8 +36,8 @@ export class BonusPageComponent implements OnInit {
   record:PerformanceRecord;
   records:PerformanceRecord[];
   year:number;
-  //TODO fetch Infos from backnd
-  constructor(http:HttpClient) {
+  // TODO fetch Infos from backnd
+  constructor(http: HttpClient) {
     this.salesmanservice = new SalesmanService(http);
     //this.orderservice = new OrderService(http);
     this.recordService = new PerformanceRecordService(http);
@@ -58,22 +57,22 @@ export class BonusPageComponent implements OnInit {
     this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;})
     console.log(this.records);
     //console.log(this.allsalesman[0]);
-    
-    
-    
-    
+
+
+
+
     debugger;
    // this.bonus = new Bonus();
     //this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
-    
-    
+
+
    // this.record.ordersRecords = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
     this.year  = this.latestYear(this.records,);
     //debugger;
     this.record = this.records.find(x=>x.year == ""+this.year);
     debugger;
     //this.bonus.partB = [];
-    
+
 //    this.year = latest;
     //Employee Infos
     //this.bonus.emplInfo.name = "bp";
@@ -81,7 +80,7 @@ export class BonusPageComponent implements OnInit {
     //PartA
    /* var ord = new Order();
     var b = new Order();
-    
+
     ord.client = "Client A";
     ord.clientRanking = 1;
     b.itemsSold = "5";
@@ -91,7 +90,7 @@ export class BonusPageComponent implements OnInit {
     /*var s = new SocialPerformanceEvaluation();
     s.competence = "Leader";
     this.bonus.partB.push(s);*/
-    
+
     //this.info = this.bonus.emplInfo;
   }
 
@@ -104,13 +103,10 @@ export class BonusPageComponent implements OnInit {
       //this.bonus.emplInfo.name = this.salesman.firstname;
       this.updateUI();
     }
-
-   
-  
   }
 
   latestYear(records:PerformanceRecord[],x:number=2000){
-    
+
     records.forEach(y=>{
       var yearNumber = Number.parseInt(y.year);
       this.bonusYears.push(yearNumber);
@@ -120,8 +116,8 @@ export class BonusPageComponent implements OnInit {
     });
     this.bonusYears = [...new Set(this.bonusYears)].sort((a,b)=>b-a);
     //debugger;
-    
-     return x; 
+
+     return x;
   }
   changedYear(selected:number){
     //alert(selected);
@@ -133,11 +129,11 @@ export class BonusPageComponent implements OnInit {
       this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
       var latest = this.latestYear(this.bonus.partA,);*/
       debugger;
-      
+
       this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
       this.year = this.latestYear(this.records,)
       this.record = this.records.find(x=>x.year == ""+this.year);
-      
+
   }
- 
+
 }
