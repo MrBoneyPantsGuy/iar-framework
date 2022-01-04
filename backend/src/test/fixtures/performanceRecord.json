@@ -1,0 +1,98 @@
+{
+  "recordId9": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": {
+          "_id": "61bd9ad4a1765f03983ee398",
+          "year": "2020",
+          "employeeId": "9",
+          "socialRecords": [
+            {
+              "competence": "Leadership Competence",
+              "targetValue": 0,
+              "actualValue": 0,
+              "bonus": 0,
+              "remark": ""
+            },
+            {
+              "competence": "Openness to Employee",
+              "targetValue": 0,
+              "actualValue": 0,
+              "bonus": 0,
+              "remark": ""
+            },
+            {
+              "competence": "Social Behaviour to Employee",
+              "targetValue": 0,
+              "actualValue": 0,
+              "bonus": 0,
+              "remark": ""
+            },
+            {
+              "competence": "Attitude towards Client",
+              "targetValue": 0,
+              "actualValue": 0,
+              "bonus": 0,
+              "remark": ""
+            },
+            {
+              "competence": "Communication Skills",
+              "targetValue": 0,
+              "actualValue": 0,
+              "bonus": 0,
+              "remark": ""
+            },
+            {
+              "competence": "Integrity to Company",
+              "targetValue": 0,
+              "actualValue": 0,
+              "bonus": 0,
+              "remark": ""
+            }
+          ],
+          "orderRecords": [
+            {
+              "productname": "HooverClean",
+              "client": "Telekom AG",
+              "clientRanking": 1,
+              "itemsSold": "10.000000000",
+              "bonus": 0,
+              "remark": ""
+            },
+            {
+              "productname": "HooverGo",
+              "client": "Telekom AG",
+              "clientRanking": 1,
+              "itemsSold": "15.000000000",
+              "bonus": 0,
+              "remark": ""
+            }
+          ],
+          "totalBonusA": 0,
+          "totalBonusB": 0,
+          "remark": ""
+        }
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That record does not exist."
+      }
+    }
+  }
+}
+

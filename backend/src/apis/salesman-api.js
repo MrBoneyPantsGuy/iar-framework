@@ -30,6 +30,19 @@ exports.getSalesmanByEmployeeId = async (req, res) => {
     });
 }
 
+exports.getAllSalesman = async (req, res) => {
+   const db = req.app.get('db');
+
+   db.collection("personal").find({}).toArray( (err, result) => {
+       if(err) throw err;
+       if(result.length === 0) {
+           res.status(404).send("Database currently has no salesman.")
+       } else {
+           res.status(200).send(result)
+       }
+   })
+}
+
 exports.querySalesmen = async (req, res) => {
     const db = req.app.get('db');
     res.status(404).send("Not yet implemented");

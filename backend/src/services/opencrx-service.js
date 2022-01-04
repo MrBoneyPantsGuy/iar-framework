@@ -86,8 +86,10 @@ exports.getSalesorders = async () => {
             }
         }));
         //insert all values in a new salesorder
+        console.log(governmentId)
         let salesorder = new Salesorders(salesorderId, customer.name, customer.accountRating, governmentId, itemsHooverGo, itemsHooverClean, year);
         //add salesorder to list
+        console.log(salesorder)
         salesorders.push(salesorder);
     };
     //returns all cleared Salesorders
