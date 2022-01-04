@@ -34,7 +34,7 @@ router.put('/salesman/:id', checkAuthorization(), salesmanApi.updateSalesman);
 router.delete('/salesman/:id', checkAuthorization(), salesmanApi.deleteSalesman);
 
 const recordApi = require('../apis/record-api');
-router.get('/record/:id', checkAuthorization(), recordApi.getRecordById);
+router.get('/record/:id', recordApi.getRecordById);
 router.post('/record', checkAuthorization(), recordApi.createRecord);
 router.put('/record/:id', checkAuthorization(), recordApi.updateRecord);
 router.delete('/record/:id', checkAuthorization(), recordApi.deleteRecord);

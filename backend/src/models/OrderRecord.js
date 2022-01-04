@@ -7,7 +7,7 @@
  * @param {number} bonus
  * @param {string} remark
  */
-class OrdersRecord{
+class OrderRecord {
     constructor(productname, client, clientRanking, itemsSold, bonus, remark) {
         this.productname = productname;
         this.client = client;
@@ -18,4 +18,4 @@ class OrdersRecord{
     }
 }
 
-module.exports = OrdersRecord;
+module.exports = OrderRecord;
