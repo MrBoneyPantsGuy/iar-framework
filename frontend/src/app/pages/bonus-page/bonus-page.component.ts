@@ -12,7 +12,7 @@ import { SocialPerformanceEvaluation } from 'src/app/components/bonus/models/soc
 import { Order } from 'src/app/components/bonus/models/order';
 import {Salesman} from '../../../../../backend/src/models/Salesman.js';
 import { Console } from 'console';
-import {OrdersRecord} from '../../../../../backend/src/models/OrderRecord.js';
+import {OrderRecord} from '../../../../../backend/src/models/OrderRecord.js';
 import {PerformanceRecord} from '../../../../../backend/src/models/PerformanceRecord.js';
 import { asLiteral } from '@angular/compiler/src/render3/view/util';
 
@@ -26,79 +26,67 @@ const sale = require('../../../../../backend/src/models/Salesman.js');
 export class BonusPageComponent implements OnInit {
  // bonus: Bonus;
   salesmanservice: SalesmanService;
-  //orderservice: OrderService;
+  orderservice: OrderService;
   salesman:Salesman;
   allsalesman:Salesman[];
   filteredSalesman:Salesman[];
-  orders:OrdersRecord[];
+  orders:OrderRecord[];
   bonusYears:number[];
   recordService:PerformanceRecordService;
   record:PerformanceRecord;
   records:PerformanceRecord[];
   year:number;
+  totalBonusA:number;
+  totalBonusB:number;
+  remark:string;
   // TODO fetch Infos from backnd
   constructor(http: HttpClient) {
     this.salesmanservice = new SalesmanService(http);
-    //this.orderservice = new OrderService(http);
+    this.orderservice = new OrderService(http);
     this.recordService = new PerformanceRecordService(http);
-  }
-
-  async ngOnInit() {
     this.bonusYears = [];
-    //this.orders = [];
+    this.orders = [];
     this.allsalesman = [];
     this.filteredSalesman = [];
     this.records = [];
     this.year = 0;
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
+    this.allsalesman.push(this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;}));
+    this.orders.push(this.orderservice.getOrdersRecord().toPromise().then(x=>{return x.body;}));
+  }
+
+  async ngOnInit() {
+ 
+    
+    this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
     this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("9").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman.push(await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;}));
-    //this.orders = await this.orderservice.getOrdersRecord().toPromise().then(x=>{return x.body;});
-    this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;})
+    this.orders.push(await this.orderservice.getOrdersRecord().toPromise().then(x=>{return x.body;}));
+    this.records.push(await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;}));
+    
     console.log(this.records);
     //console.log(this.allsalesman[0]);
 
 
 
 
+    
     debugger;
-   // this.bonus = new Bonus();
-    //this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
-
-
-   // this.record.ordersRecords = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
     this.year  = this.latestYear(this.records,);
     //debugger;
     this.record = this.records.find(x=>x.year == ""+this.year);
+    console.log(this.record);
     debugger;
     //this.bonus.partB = [];
+    this.updateUI();
 
-//    this.year = latest;
-    //Employee Infos
-    //this.bonus.emplInfo.name = "bp";
-
-    //PartA
-   /* var ord = new Order();
-    var b = new Order();
-
-    ord.client = "Client A";
-    ord.clientRanking = 1;
-    b.itemsSold = "5";
-    this.bonus.partA.push(ord);
-    this.bonus.partA.push(b);*/
-    //PartB
-    /*var s = new SocialPerformanceEvaluation();
-    s.competence = "Leader";
-    this.bonus.partB.push(s);*/
-
-    //this.info = this.bonus.emplInfo;
   }
 
    search(searchtext:string){
     this.filteredSalesman = this.allsalesman[0].filter(x=>x.firstname.includes(searchtext));
     if(this.filteredSalesman.length == 1){
       this.salesman = this.filteredSalesman[0];
-      debugger;
+      
       console.log(this.salesman.firstname);
       //this.bonus.emplInfo.name = this.salesman.firstname;
       this.updateUI();
@@ -110,7 +98,7 @@ export class BonusPageComponent implements OnInit {
     records.forEach(y=>{
       var yearNumber = Number.parseInt(y.year);
       this.bonusYears.push(yearNumber);
-      debugger;
+      
       if(yearNumber>x)
         x=yearNumber
     });
@@ -119,21 +107,17 @@ export class BonusPageComponent implements OnInit {
 
      return x;
   }
-  changedYear(selected:number){
+  changedYear(selected){
     //alert(selected);
     this.record = this.records.filter(x=>x.year == ""+selected);
     this.year = selected;
   }
   async updateUI(){
-     /* this.bonus.emplInfo = new EmployeeInfo(this.salesman.firstname+" "+this.salesman.lastname,this.salesman.employeeId,this.salesman.department);
-      this.bonus.partA = this.orders.filter(x=>x.governmentId == this.salesman.governmentId);
-      var latest = this.latestYear(this.bonus.partA,);*/
-      debugger;
-
       this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
       this.year = this.latestYear(this.records,)
+      debugger;
       this.record = this.records.find(x=>x.year == ""+this.year);
-
-  }
+      debugger;
+    }
 
 }
