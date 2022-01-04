@@ -45,4 +45,5 @@
 # System Files
 /frontend/.DS_Store
 /frontend/Thumbs.db
+/frontend/package-lock.json
 

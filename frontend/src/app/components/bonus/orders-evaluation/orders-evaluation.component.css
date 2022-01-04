@@ -1,0 +1,17 @@
+h2{
+    margin-top: 2em ;
+}
+table{
+    border-style: solid ;
+    width: 20em;
+   
+}
+
+input:read-only{
+    border: none;
+    text-align: center
+}
+.columnTitle{
+    font-weight: bold;
+    text-align: center;
+}
