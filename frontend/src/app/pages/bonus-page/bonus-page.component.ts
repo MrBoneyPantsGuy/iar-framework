@@ -12,7 +12,7 @@ import {Salesman} from '../../../../../backend/src/models/Salesman.js';
 import { Console } from 'console';
 import {OrderRecord} from '../../../../../backend/src/models/OrderRecord.js';
 import {PerformanceRecord} from '../../../../../backend/src/models/PerformanceRecord.js';
-
+import {SocialRecord} from  "../../../../../backend/src/models/SocialRecord.js";
 const sale = require('../../../../../backend/src/models/Salesman.js');
 
 @Component({
@@ -56,6 +56,18 @@ export class BonusPageComponent implements OnInit {
     this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
     console.log(this.records);
 
+  }
+   changedRecord(item:[SocialRecord[]|OrderRecord[],any]){
+    if(item[0].hasOwnProperty("competence")){
+      this.record.socialRecords = item
+    }else if(item[0].hasOwnProperty("productname")){
+      this.record.orderRecord = item
+    }else{
+      console.error(item + "is invalid");
+      throw new Error();
+    }
+    //update logik
+    //this.recordService.
   }
 
     search(searchtext:string){

@@ -12,10 +12,11 @@
 
       <td><input placeholder="{{item.targetValue}}" readonly/></td>
       <td><input placeholder="{{item.actualValue}}" readonly/></td>
-      <td><input placeholder="{{item.bonus}}"/></td>
-      <td><input placeholder="{{item.remark}}"/></td>
+      <td><input placeholder="{{item.bonus}}" (focusout)="changeBonus([item,+$event.target.value])"/></td>
+      <td><input placeholder="{{item.remark}}" (focusout)="changeRemark([item,$event.target.value])"/></td>
     </tr>
 </table>
+<h3>Total Bonus B: {{total}}</h3>
 <!--table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="Competence">
     <th mat-header-cell *matHeaderCellDef>Competence</th>

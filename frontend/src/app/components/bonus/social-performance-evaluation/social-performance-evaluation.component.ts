@@ -1,5 +1,5 @@
 import { SocialPerformanceEvaluation } from './../models/socialPerformanceEvaluation';
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, EventEmitter, Output } from '@angular/core';
 import {SocialRecord} from "../../../../../../backend/src/models/SocialRecord.js";
 
 @Component({
@@ -9,14 +9,27 @@ import {SocialRecord} from "../../../../../../backend/src/models/SocialRecord.js
 })
 export class SocialPerformanceEvaluationComponent implements OnInit {
   @Input() social: SocialRecord[];
+  @Output() changedRecord = new EventEmitter<SocialRecord[]>();
+  total: number = 0
   constructor() {
-    
-    /*var s = new SocialPerformanceEvaluation();
-    s.competence = "Leader";
-    this.social.push(s);*/
+  
+   }
+   
+   private changeBonus(bonus){
+      this.social.find(x => x.competence == bonus[0].competence).bonus = bonus[1];
+      this.total = this.social.reduce((sum,current)=> sum + current.bonus,0)
+      this.saveChanges();
+   }
+   private changeRemark(remark){
+    this.social.find(x => x.competence == remark[0].competence).remark = remark[1];
+    this.saveChanges();
    }
 
+   private saveChanges(){
+    this.changedRecord.emit(this.social)
+   }
   ngOnInit(): void {
+    this.total = this.social.reduce((sum,current)=> sum + current.bonus,0)
   }
 
 }
