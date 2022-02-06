@@ -10,9 +10,9 @@
     <tr *ngFor="let item of social">
       <td><input placeholder="{{item.competence}}" readonly/></td>
 
-      <td><input placeholder="{{item.targetValue}}" readonly/></td>
-      <td><input placeholder="{{item.actualValue}}" readonly/></td>
-      <td><input placeholder="{{item.bonus}}" (focusout)="changeBonus([item,+$event.target.value])"/></td>
+      <td><input placeholder="{{item.targetValue}}" /></td>
+      <td><input placeholder="{{item.actualValue}}" (focusout)="alert()"/></td>
+      <td><input placeholder="{{item.bonus}}" readonly/></td>
       <td><input placeholder="{{item.remark}}" (focusout)="changeRemark([item,$event.target.value])"/></td>
     </tr>
 </table>

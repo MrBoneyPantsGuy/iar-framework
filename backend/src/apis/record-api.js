@@ -18,7 +18,7 @@ exports.getRecordById = async (req, res) => {
 exports.createRecord = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
-    const performanceRecord = new PerformanceRecord(undefined, data.year,data.employeeId, JSON.parse(req.body.socialRecords), JSON.parse(req.body.orderRecords), data.totalBonusA, data.totalBonusB, data.remark);
+    const performanceRecord = new PerformanceRecord(undefined, data.year,data.employeeId,req.body.socialRecords, req.body.orderRecords, data.totalBonusA, data.totalBonusB, data.remark);
 
     db.collection('record').insertOne(performanceRecord, (err) => {
         if (err) res.status(500).send(err);
@@ -29,14 +29,14 @@ exports.createRecord = async (req, res) => {
 exports.updateRecord = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
-    const performanceRecord = { $set: {year: data.year, socialRecords: JSON.parse(data.socialRecords), orderRecords: JSON.parse(data.orderRecords), totalBonusA: data.totalBonusA, totalBonusB: data.totalBonusB, remark: data.remark}};
+    const performanceRecord = { $set: {year: data.year, socialRecords: data.socialRecords, orderRecords: data.orderRecords, totalBonusA: data.totalBonusA, totalBonusB: data.totalBonusB, remark: data.remark}};
 
     db.collection('record').updateOne({"_id": new ObjectId(data.recordId)}, performanceRecord, (err, result) => {
         if (err) throw err;
         if(result === null) {
             res.status(404).send("No such Record");
         } else {
-            res.status(200).send('OK');
+            res.status(200).send(result);
         }
     })
 }

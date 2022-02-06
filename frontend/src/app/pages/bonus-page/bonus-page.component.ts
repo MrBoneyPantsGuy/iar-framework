@@ -57,7 +57,7 @@ export class BonusPageComponent implements OnInit {
     console.log(this.records);
 
   }
-   changedRecord(item:[SocialRecord[]|OrderRecord[],any]){
+   changedRecord(item:[SocialRecord[]|OrderRecord[]]){
     if(item[0].hasOwnProperty("competence")){
       this.record.socialRecords = item
     }else if(item[0].hasOwnProperty("productname")){
@@ -69,7 +69,9 @@ export class BonusPageComponent implements OnInit {
     //update logik
     this.recordService.updatePerformanceRecord(this.record)
   }
-
+changeRemark(m){
+  alert();
+}
     search(searchtext:string){
     this.filteredSalesman = this.allsalesman.filter(x=>x.firstname.includes(searchtext));
     if(this.filteredSalesman.length == 1){

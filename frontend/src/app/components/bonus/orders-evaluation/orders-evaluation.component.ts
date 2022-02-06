@@ -21,12 +21,12 @@ export class OrdersEvaluationComponent implements OnInit {
     this.total = this.orders.reduce((sum,current)=> sum + current.bonus,0)
   }
   
-  private changeBonus(bonus){
+   changeBonus(bonus){
     this.orders.find(x => x.productname == bonus[0].productname).bonus = bonus[1];
     this.total = this.orders.reduce((sum,current)=> sum + current.bonus,0)
     this.saveChanges();
  }
- private changeRemark(remark){
+  changeRemark(remark){
   this.orders.find(x => x.productname == remark[0].productname).remark = remark[1];
   this.saveChanges();
  }
