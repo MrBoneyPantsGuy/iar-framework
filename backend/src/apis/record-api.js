@@ -29,9 +29,10 @@ exports.createRecord = async (req, res) => {
 exports.updateRecord = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
+    console.log(data)
     const performanceRecord = { $set: {year: data.year, socialRecords: data.socialRecords, orderRecords: data.orderRecords, totalBonusA: data.totalBonusA, totalBonusB: data.totalBonusB, remark: data.remark}};
-
-    db.collection('record').updateOne({"_id": new ObjectId(data.recordId)}, performanceRecord, (err, result) => {
+    console.log("RTec id"+ data._id)
+    db.collection('record').updateOne({'_id': new ObjectId(data._id)}, performanceRecord, (err, result) => {
         if (err) throw err;
         if(result === null) {
             res.status(404).send("No such Record");
