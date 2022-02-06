@@ -23,6 +23,7 @@ import { SocialPerformanceEvaluationComponent } from './components/bonus/social-
 import { BonusPageComponent } from './pages/bonus-page/bonus-page.component';
 import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
+import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatTableModule} from "@angular/material/table";
     EmployeeInfoPageComponent,
     OrdersEvaluationComponent,
     SocialPerformanceEvaluationComponent,
-    BonusPageComponent
+    BonusPageComponent,
+    OverviewPageComponent
   ],
   imports: [
     BrowserModule,

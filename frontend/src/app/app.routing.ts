@@ -1,3 +1,4 @@
+import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
 import { BonusPageComponent } from './pages/bonus-page/bonus-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'example', component: ExamplePageComponent, canActivate: [AuthGuardService]},
   {path: '', component: LandingPageComponent, canActivate: [AuthGuardService]},
   {path: 'bonus', component: BonusPageComponent,canActivate: [AuthGuardService]},
+  {path:'overview',component:OverviewPageComponent,canActivate:[AuthGuardService]},
   {path: '**', component: NotFoundPageComponent} // these entries are matched from top to bottom => not found should be the last entry
 ];
 

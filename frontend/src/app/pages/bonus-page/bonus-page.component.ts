@@ -67,7 +67,7 @@ export class BonusPageComponent implements OnInit {
       throw new Error();
     }
     //update logik
-    //this.recordService.
+    this.recordService.updatePerformanceRecord(this.record)
   }
 
     search(searchtext:string){
