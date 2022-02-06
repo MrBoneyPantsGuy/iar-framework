@@ -31,7 +31,7 @@
     <td><input type="text"readonly placeholder="{{item.clientRanking}}"/></td>  
     <td ><input type="text" readonly placeholder="{{item.itemsSold/1}}"/></td>
     <td><input type="text"  readonly placeholder="{{item.bonus}}"/></td>
-    <td><input type="text" [remark]="remark" (focusout)="changeRemark([item,$event.target.value])"/></td>
+    <td><input type="text" value="{{item.remark}}" (focusout)="changeRemark([item,$event.target.value])"/></td>
   </tr>
 </ng-container>
 </table>
