@@ -61,7 +61,7 @@ export class BonusPageComponent implements OnInit {
     if(item[0].hasOwnProperty("competence")){
       this.record.socialRecords = item
     }else if(item[0].hasOwnProperty("productname")){
-      this.record.orderRecord = item
+      this.record.orderRecords = item
     }else{
       console.error(item + "is invalid");
       throw new Error();
