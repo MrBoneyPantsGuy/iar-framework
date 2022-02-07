@@ -7,3 +7,7 @@ exports.updateBonus = (records) => {
     })
     return sum;
 }
+
+exports.calculateBonusForOrder = (order) => {
+    return order.clientRanking*order.itemsSold*6.75;
+}

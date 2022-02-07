@@ -18,6 +18,9 @@ exports.getRecordById = async (req, res) => {
 exports.createRecord = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
+    data.orderRecords.forEach((order) => {
+        order.bonus = recordService.calculateBonusForOrder(order);
+    })
     const bonusA = recordService.updateBonus(data.socialRecords);
     const bonusB = recordService.updateBonus(data.orderRecords);
     const performanceRecord = new PerformanceRecord(undefined, data.year,data.employeeId,req.body.socialRecords, req.body.orderRecords, bonusA, bonusB, data.remark);
@@ -30,6 +33,9 @@ exports.createRecord = async (req, res) => {
 exports.updateRecord = async (req, res) => {
     const db = req.app.get('db');
     const data = req.body;
+    data.orderRecords.forEach((order) => {
+        order.bonus = recordService.calculateBonusForOrder(order);
+    })
     const bonusA = recordService.updateBonus(data.socialRecords);
     const bonusB = recordService.updateBonus(data.orderRecords);
     const performanceRecord = { $set: {year: data.year, socialRecords: data.socialRecords, orderRecords: data.orderRecords, totalBonusA: bonusA, totalBonusB: bonusB, remark: data.remark}};

@@ -1,0 +1,70 @@
+{
+  "data": {
+  "year" : "2024",
+  "employeeId" : "100",
+  "socialRecords" : [
+    {
+      "competence" : "Leadership Competence",
+      "targetValue" : 0,
+      "actualValue" : 0,
+      "bonus" : 0,
+      "remark" : ""
+    },
+    {
+      "competence" :  "Openness to Employee",
+      "targetValue" : 0,
+      "actualValue" : 0,
+      "bonus" : 0,
+      "remark" : ""
+    },
+    {
+      "competence" : "Social Behaviour to Employee",
+      "targetValue" : 0,
+      "actualValue" : 0,
+      "bonus" : 0,
+      "remark" : ""
+    },
+    {
+      "competence" : "Attitude towards Client",
+      "targetValue" : 0,
+      "actualValue" : 0,
+      "bonus" : 0,
+      "remark" : ""
+    },
+    {
+      "competence" : "Communication Skills",
+      "targetValue" : 0,
+      "actualValue" : 0,
+      "bonus" : 0,
+      "remark" : ""
+    },
+    {
+      "competence" : "Integrity to Company",
+      "targetValue" : 0,
+      "actualValue" : 0,
+      "bonus" : 0,
+      "remark" : ""
+    }
+  ],
+  "orderRecords" : [
+    {
+      "productname" : "HooverClean",
+      "client" : "Telekom AG",
+      "clientRanking" : 1,
+      "itemsSold" : "10.000000000",
+      "bonus" : 0,
+      "remark" : ""
+    },
+    {
+      "productname" : "HooverGo",
+      "client" : "Telekom AG",
+      "clientRanking" : 1,
+      "itemsSold" : "15.000000000",
+      "bonus" : 0,
+      "remark" : ""
+    }
+  ],
+  "totalBonusA" : 0,
+  "totalBonusB" : 0,
+  "remark" : ""
+}}

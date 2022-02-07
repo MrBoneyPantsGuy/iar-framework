@@ -6,6 +6,7 @@ const request = require('request');
 const sinon = require('sinon');
 const baseUrl = 'http://localhost:8080/api';
 const record = require('./fixtures/performanceRecord.json');
+const newRecord = require('./fixtures/newRecord.json');
 
 describe('Performance Record Api', () => {
     describe('when not stubbed', () => {
@@ -43,10 +44,17 @@ describe('Performance Record Api', () => {
                 done();
             })
         });
+        describe('POST /record', () => {
+            it('should return the performance record that was added', (done) => {
+                axios.post(`${baseUrl}/record`, newRecord.data).then( res => {
+                    res.statusCode.should.eql(201);
+                })
+
+            });
+        });
     });
     describe('when stubbed', () => {
         this.get = sinon.stub(request, 'get');
-
         describe('GET /record/{id}', () => {
             it('should return the respective performance record with the given employeeId', (done) => {
                 this.get.yields(null, record.recordId9.success.res, JSON.stringify(record.recordId9.success.body));
@@ -82,6 +90,18 @@ describe('Performance Record Api', () => {
                     done();
                 })
             })
+        });
+        this.post = sinon.stub(request, 'post')
+        describe('POST /record', () => {
+            it('should return the performance record that was added', (done) => {
+                const options = {
+                    body: {
+                        name: 'Test',
+
+                    }
+                }
+                const obj =
+            });
         });
     });
 });
