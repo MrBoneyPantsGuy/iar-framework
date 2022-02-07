@@ -23,7 +23,7 @@ router.get('/login', authApi.isLoggedIn); //the function, which handles requests
 
 const userApi = require('../apis/user-api');
 router.get('/user', checkAuthorization(), userApi.getSelf);
-
+router.post('/user', checkAuthorization(), userApi.add);
 const salesmanApi = require('../apis/salesman-api');
 router.get('/salesman/id/:salesmanid', checkAuthorization(), salesmanApi.getSalesmanBySalesmanId);
 router.get('/salesman/employeeid/:employeeid', checkAuthorization(), salesmanApi.getSalesmanByEmployeeId);

@@ -19,4 +19,7 @@ export class UserService {
   getOwnUser():Observable<User>{
     return this.http.get<User>('/api/user'); //use angular's integrated HTTP-client to make a get request; handle the response as a User object
   }
+  createUser(user:User):Observable<User>{
+    return this.http.post<User>('api/user',user);
+  }
 }
