@@ -33,7 +33,7 @@ exports.deAuthenticate = function (session){
 exports.getOrangeHRMBearerToken = async () => {
     const data = {
         'password': '*Safb02da42Demo$',
-        'username': 'demouser',
+        'username': 'Lysek',
         'grant_type': 'password',
         'client_id': 'api_oauth_id',
         'client_secret': 'oauth_secret'
