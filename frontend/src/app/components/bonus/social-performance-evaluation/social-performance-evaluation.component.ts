@@ -10,14 +10,12 @@ import {SocialRecord} from "../../../../../../backend/src/models/SocialRecord.js
 export class SocialPerformanceEvaluationComponent implements OnInit {
   @Input() social: SocialRecord[];
   @Output() changedRecord = new EventEmitter<SocialRecord[]>();
-  total: number = 0
   constructor() {
   
    }
    
    private changeBonus(bonus){
       this.social.find(x => x.competence == bonus[0].competence).bonus = bonus[1];
-      this.total = this.social.reduce((sum,current)=> sum + current.bonus,0)
       this.saveChanges();
    }
    private changeRemark(remark){
@@ -29,7 +27,6 @@ export class SocialPerformanceEvaluationComponent implements OnInit {
     this.changedRecord.emit(this.social)
    }
   ngOnInit(): void {
-    this.total = this.social.reduce((sum,current)=> sum + current.bonus,0)
   }
 
 }

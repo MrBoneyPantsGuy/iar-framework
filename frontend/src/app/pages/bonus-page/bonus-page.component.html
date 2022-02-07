@@ -20,13 +20,13 @@
 <app-employee-info-page [year]="year" [emplInfo]="salesman"></app-employee-info-page>
 <hr>
 <app-orders-evaluation [orders]="record.orderRecords" (changedRecord)="changedRecord($event)"></app-orders-evaluation>
-
+<h3>Total Bonus A {{totalBonusA }}</h3>
 <hr>
 <app-social-performance-evaluation [social]="record.socialRecords"></app-social-performance-evaluation>
-
+<h3>Total Bonus B {{totalBonusB}}</h3>
 <hr>
 <h2>Remarks</h2>
 <textarea>{{remark}}</textarea>
 <hr>
-<h3>Total Bonus A+B</h3>
+<h3>Total Bonus A+B {{totalBonusA + totalBonusB}}</h3>
 <hr>

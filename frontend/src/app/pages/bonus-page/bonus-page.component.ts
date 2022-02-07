@@ -34,6 +34,7 @@ export class BonusPageComponent implements OnInit {
   totalBonusA:number;
   totalBonusB:number;
   remark:string;
+  
   // TODO fetch Infos from backnd
   constructor(http: HttpClient) {
     this.salesmanservice = new SalesmanService(http);
@@ -107,6 +108,8 @@ changeRemark(m){
         this.year = ""+this.latestYear(this.records,);
       if(this.records.length > 0)
         this.record = this.records.find(x=>x.year == this.year);
+        this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
+        this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
     }
 
 }

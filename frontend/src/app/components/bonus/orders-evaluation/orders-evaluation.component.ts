@@ -12,18 +12,16 @@ export class OrdersEvaluationComponent implements OnInit {
   enumKeys:any[];
   @Input() orders: OrdersRecord[];
   @Output() changedRecord= new EventEmitter<OrdersRecord[]>();
-  total: number = 0
+  
   constructor() {
   }
 
 
   ngOnInit() {
-    this.total = this.orders.reduce((sum,current)=> sum + current.bonus,0)
   }
   
    changeBonus(bonus){
     this.orders.find(x => x.productname == bonus[0].productname).bonus = bonus[1];
-    this.total = this.orders.reduce((sum,current)=> sum + current.bonus,0)
     this.saveChanges();
  }
   changeRemark(remark){
