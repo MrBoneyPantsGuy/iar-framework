@@ -26,3 +26,31 @@ exports.getAllEmployees = async () => {
         });
     return employees;
 }
+
+exports.updateBonusSalary = async (record) => {
+    // get a new token for the request
+    let token = await authService.getOrangeHRMBearerToken()
+        .then(res => res.access_token)
+        .catch(err => console.log(err));
+
+    // configure the route and include the new token
+    let config = {
+        method: 'post',
+        url:  url + `/employee/${record.employeeId}/bonussalary`,
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        data: {
+            year: record.year,
+            value: record.totalBonusA + record.totalBonusB
+        }
+    };
+
+    // call OrangeHRM Api and store
+    let bonus = await axios(config)
+        .then( response => console.log(response))
+        .catch(function (error) {
+            console.log(error);
+        });
+    return bonus;
+}
