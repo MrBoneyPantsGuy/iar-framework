@@ -2,6 +2,7 @@ const axios = require('axios');
 const auth = require('../apis/auth-api');
 const authService = require("../services/auth-service");
 const url = 'https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/api/v1';
+const FormData = require('form-data');
 
 exports.getAllEmployees = async () => {
     // get a new token for the request
@@ -33,20 +34,24 @@ exports.updateBonusSalary = async (record) => {
         .then(res => res.access_token)
         .catch(err => console.log(err));
 
+    // Set up the data
+    let data = new FormData();
+    data.append('year', record.year);
+    data.append('value', Math.trunc(record.totalBonusA + record.totalBonusB));  // orangeHRM endpoint cant deal with floats => truncate all decimal places
+
     // configure the route and include the new token
     let config = {
         method: 'post',
-        url:  url + `/employee/${record.employeeId}/bonussalary`,
+        url: url + `/employee/${record.employeeId}/bonussalary`,
         headers: {
-            'Authorization': 'Bearer ' + token
+            ...data.getHeaders(),   // creates content-type with boundary => something like 'Content-Type': 'multipart/form-data; boundary=--------------------------580187173548598276277598',
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json, text/plain, */*',
         },
-        data: {
-            year: record.year,
-            value: record.totalBonusA + record.totalBonusB
-        }
+        data : data
     };
 
-    // call OrangeHRM Api and store
+    // call OrangeHRM Api and store the bonus
     let bonus = await axios(config)
         .then( response => console.log(response))
         .catch(function (error) {
