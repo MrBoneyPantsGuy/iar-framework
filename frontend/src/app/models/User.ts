@@ -1,3 +1,4 @@
+import { Roles } from './Roles';
 /**
  * this model specifies the format to exchange a user with the backend
  */
@@ -8,6 +9,7 @@ export class User{
     public firstname: string,
     public lastname: string,
     public email: string,
-    public isAdmin:boolean
+    public isAdmin:boolean,
+    public role:Roles  //ceo,salesman,hr
   ) {  }
 }

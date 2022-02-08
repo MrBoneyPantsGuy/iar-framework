@@ -1,8 +1,10 @@
+import { Roles } from './../models/Roles';
 import { Injectable } from '@angular/core';
 import {Credentials} from "../models/Credentials";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable, Observer} from "rxjs";
 import {map, tap} from "rxjs/operators";
+import { User } from '../models/User';
 
 /**
  * Services specify logic, which is instantiated singularly -> it is shared between components
@@ -90,4 +92,6 @@ export class AuthService {
       })
     );
   }
+
+
 }
