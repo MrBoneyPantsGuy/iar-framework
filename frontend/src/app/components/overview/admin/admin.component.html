@@ -1,0 +1,11 @@
+<div>
+    <label for="bonusBtn">Bonus check </label>
+    <button type="button" id="bonusBtn" (click)="aproveBonus()">Aprove Bonus</button>
+</div>
+<ng-container *ngIf="isCeo">
+    
+        <label for="fechtBtn">Fetch Data from orangeHRM and OpenCRX </label>
+        <button type="button" id="fetchBtn" (click)="fetchData()">Fetch</button>
+    
+</ng-container>
+

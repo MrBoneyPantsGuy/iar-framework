@@ -1,6 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Roles } from 'src/app/models/Roles';
 import { User } from 'src/app/models/User';
 
@@ -11,18 +11,12 @@ import { User } from 'src/app/models/User';
 })
 export class OverviewPageComponent implements OnInit {
  user:User
-  constructor(private userService:UserService) { }
+   constructor(private userService:UserService) { }
 
-   ngOnInit() {
-    this.userService.getOwnUser().subscribe({next:(value)=>{console.log(value.role); if(value.role == Roles.CEO){
-      alert("ceo")
-    
-    
-    
-    
-  }},complete:()=>{console.log("completed");}});
-   
-}
+  async ngOnInit() {
+     this.userService.getOwnUser().subscribe({next:(value)=>{console.log(value.role); this.user=value;},complete:()=>{console.log("completed");}});
+  }
+
    /*fetchUser(){
      this.userService.getOwnUser().subscribe({next:(value)=>{console.log(value)},complete:()=>{console.log("completed");}});
    

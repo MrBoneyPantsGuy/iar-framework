@@ -1,3 +1,6 @@
+import { filter, find, isEmpty, map, pluck, scan } from 'rxjs/operators';
+import { User } from './../../models/User';
+import { UserService } from './../../services/user.service';
 import { PerformanceRecordService } from './../../services/performance-record.service';
 import { Observable } from 'rxjs';
 import { logging } from 'protractor';
@@ -13,6 +16,7 @@ import { Console } from 'console';
 import {OrderRecord} from '../../../../../backend/src/models/OrderRecord.js';
 import {PerformanceRecord} from '../../../../../backend/src/models/PerformanceRecord.js';
 import {SocialRecord} from  "../../../../../backend/src/models/SocialRecord.js";
+import { emit } from 'process';
 const sale = require('../../../../../backend/src/models/Salesman.js');
 
 @Component({
@@ -34,9 +38,10 @@ export class BonusPageComponent implements OnInit {
   totalBonusA:number;
   totalBonusB:number;
   remark:string;
-  
+  user:Observable<User>
+   isRole:boolean = true
   // TODO fetch Infos from backnd
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient,private userService:UserService) {
     this.salesmanservice = new SalesmanService(http);
     this.recordService = new PerformanceRecordService(http);
     this.bonusYears = [];
@@ -45,17 +50,21 @@ export class BonusPageComponent implements OnInit {
     this.filteredSalesman = [];
     this.records = [];
     this.year = "";
+    this.user =  this.userService.getOwnUser()
     
   }
 
   async ngOnInit() {
-   
     
+    this.isRole = await this.userIsCeoOrHr()
+    console.log("init"+this.isRole)
+    //this.userService.getOwnUser().subscribe(e => {this.user = e;console.log(e)})//.subscribe({next:(user)=>this.user = user})
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
     this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("9").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman = await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;});
     this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
     console.log(this.records);
+    
 
   }
    changedRecord(item:[SocialRecord[]|OrderRecord[]]){
@@ -106,10 +115,17 @@ changeRemark(m){
       this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
       if(!yearIsSet)
         this.year = ""+this.latestYear(this.records,);
-      if(this.records.length > 0)
+      if(this.records.length > 0){
         this.record = this.records.find(x=>x.year == this.year);
         this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
         this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
+      }
     }
+
+     async userIsCeoOrHr(){
+       return 2 > await this.user.pipe(
+         pluck('role')
+         ).toPromise();
+      }
 
 }

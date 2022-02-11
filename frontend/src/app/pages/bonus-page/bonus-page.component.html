@@ -1,3 +1,8 @@
+
+<ng-container *ngIf="!isRole;else admin1">
+  <h1>My Bonus</h1>
+</ng-container>
+<ng-template #admin1>
 <h1>Bonus Computation</h1>
 <h2>Search employee</h2>
 <input type="text"  id="searchInput"  (input)="search($event.target.value)" placeholder="Type to start searching..."/>
@@ -9,6 +14,7 @@
         {{item.firstname}}, {{item.lastname}}, {{item.employeeId}}
       </li>
     </ul>
+  </ng-template>
   <label for="yearOfPerfomance">Previous Bonus:</label>
  <select name="yearOfPerfomance" id="yearOfPerfomance" (change)="changedYear($event.target.value)">
    
@@ -17,16 +23,24 @@
    </ng-container>
    
  </select>
+
+
 <app-employee-info-page [year]="year" [emplInfo]="salesman"></app-employee-info-page>
-<hr>
-<app-orders-evaluation [orders]="record.orderRecords" (changedRecord)="changedRecord($event)"></app-orders-evaluation>
+<hr/>
+<app-orders-evaluation [orders]="record?.orderRecords" (changedRecord)="changedRecord($event)"></app-orders-evaluation>
 <h3>Total Bonus A {{totalBonusA }}</h3>
-<hr>
-<app-social-performance-evaluation [social]="record.socialRecords"></app-social-performance-evaluation>
+<hr/>
+<app-social-performance-evaluation [social]="record?.socialRecords"></app-social-performance-evaluation>
 <h3>Total Bonus B {{totalBonusB}}</h3>
-<hr>
+<hr/>
 <h2>Remarks</h2>
-<textarea>{{remark}}</textarea>
-<hr>
+<textarea [(value)]="remark" [readonly]="!isRole"></textarea>
+<hr/>
 <h3>Total Bonus A+B {{totalBonusA + totalBonusB}}</h3>
-<hr>
+<hr/>
+<ng-container *ngIf="isRole">
+  <app-admin [record]="record" [user]="user"></app-admin>
+</ng-container>
+
+
+

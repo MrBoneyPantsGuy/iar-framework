@@ -24,6 +24,7 @@ import { BonusPageComponent } from './pages/bonus-page/bonus-page.component';
 import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
+import { AdminComponent } from './components/overview/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { OverviewPageComponent } from './pages/overview-page/overview-page.compo
     OrdersEvaluationComponent,
     SocialPerformanceEvaluationComponent,
     BonusPageComponent,
-    OverviewPageComponent
+    OverviewPageComponent,
+    AdminComponent
+    
   ],
   imports: [
     BrowserModule,
