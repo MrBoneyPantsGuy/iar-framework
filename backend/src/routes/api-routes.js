@@ -38,6 +38,7 @@ router.get('/record/:id', recordApi.getRecordById);
 router.post('/record', checkAuthorization(), recordApi.createRecord);
 router.put('/record', checkAuthorization(), recordApi.updateRecord);
 router.delete('/record/:id', checkAuthorization(), recordApi.deleteRecord);
+router.put('/record/approve', checkAuthorization(), recordApi.approveRecord);
 
 const controlApi = require('../apis/control-api');
 router.get('/control/fetchemployees', checkAuthorization(), controlApi.fetchAllEmployees);
