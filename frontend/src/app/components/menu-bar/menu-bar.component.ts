@@ -20,7 +20,7 @@ export class MenuBarComponent implements OnInit {
     {title: 'Welcome', routerLink: ''}, //the tile is the text on the button, the routerLink specifies, where it will navigate
    // {title: 'Example', routerLink: 'example'},
     {title: 'Bonus', routerLink:'bonus'},
-    {title:'Overview',routerLink:'overview'}
+    {title:'Admin Panel',routerLink:'overview'}
   ];
 
   /**
@@ -50,5 +50,15 @@ export class MenuBarComponent implements OnInit {
     this.userService.getOwnUser().subscribe(user => {
       this.user = user
     });
+  }
+  checkTitle(text){
+   // alert(text)
+   //console.log(text == 'Admin Panel' && this.user.role == 0)
+   if(text != 'Admin Panel'){
+     return true;
+   }else{
+     return this.user.role == 0
+   }
+   // return true;
   }
 }
