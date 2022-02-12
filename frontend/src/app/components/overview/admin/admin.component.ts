@@ -43,9 +43,9 @@ export class AdminComponent implements OnInit {
       alert("Everything was fetched")
   }
 
-  aproveBonus(){
+  async aproveBonus(){
     console.log(this.record._id)
-    this.adminService.aproveBonus(this.record._id,{"ceo":true,"hr":false,"salesman":false}).subscribe({
+    this.adminService.aproveBonus(this.record._id,{"ceo":await this.userIsCeo(),"hr":await this.userIsHr(),"salesman":await this.userIsSalesman()}).subscribe({
       complete:()=>{
         alert("Bonus aproved")
       },
@@ -57,6 +57,16 @@ export class AdminComponent implements OnInit {
   }
   async userIsCeo(){
     return 0 == await this.user.pipe(
+      pluck('role')
+      ).toPromise();
+   }
+   async userIsHr(){
+    return 1 == await this.user.pipe(
+      pluck('role')
+      ).toPromise();
+   }
+   async userIsSalesman(){
+    return 2 == await this.user.pipe(
       pluck('role')
       ).toPromise();
    }

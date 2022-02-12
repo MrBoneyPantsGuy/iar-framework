@@ -1,5 +1,3 @@
-import { Status } from './../models/Status';
-import { Approval } from '../models/Approval';
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +22,8 @@ export class AdminService {
      return [this.fetchEmployees(),this.fetchSalesOrders(),this.fetchCustomers()]  
   }
 
-  aproveBonus(_id:string,status){
-    return this.client.put<HttpResponse<any>>('api/record/approve',{_id,status})
+  aproveBonus(_id:string,approval){
+    console.log({_id,approval})
+    return this.client.put<HttpResponse<any>>('api/record/approve',{_id,approval})
   }
 }
