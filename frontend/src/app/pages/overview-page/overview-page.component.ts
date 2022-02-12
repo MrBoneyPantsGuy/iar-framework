@@ -20,9 +20,8 @@ export class OverviewPageComponent implements OnInit {
    
   }*/
   createUser(){
-    this.userService.createUser(this.user).toPromise().then(res=>alert(res)).catch(console.error)/*.subscribe({
-      next:(res)=>alert(this.user.lastname + " was created"),
-    error:(error) => alert("User creation failed: "+error.statusCode)})*/
+    this.userService.createUser(this.user).toPromise().then(res=>alert(res.firstname +" "+ res.lastname + "User "+res.username+" was created successfully" ))
+    .catch(console.error);
   }
   setRole(event){
     this.user.role = event.target.value
