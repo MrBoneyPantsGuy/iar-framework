@@ -1,5 +1,5 @@
 import { PerformanceRecordService } from './../../../services/performance-record.service';
-import { AdminService } from './../../../admin.service';
+import { AdminService } from '../../../services/admin.service';
 import { UserService } from './../../../services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
@@ -44,10 +44,12 @@ export class AdminComponent implements OnInit {
   }
 
   aproveBonus(){
-    this.adminService.aproveBonus(this.record).subscribe({
+    console.log(this.record._id)
+    this.adminService.aproveBonus(this.record._id,{"ceo":true,"hr":false,"salesman":false}).subscribe({
       complete:()=>{
         alert("Bonus aproved")
       },
+      next:(val)=>{console.log(val)},
     error:(error)=>{
       alert("Failed to aprove the bonus!")
       console.error(error)
