@@ -11,7 +11,7 @@ import { User } from 'src/app/models/User';
 })
 export class OverviewPageComponent implements OnInit {
  user:User
-   constructor(private userService:UserService) { this.user = new User("","","","","",false,Roles.SALES) }
+   constructor(private userService:UserService) { this.user = new User("","","","","",false,"",Roles.SALES) }
   async ngOnInit() {
   }
 
@@ -20,7 +20,8 @@ export class OverviewPageComponent implements OnInit {
    
   }*/
   createUser(){
-    this.userService.createUser(this.user).subscribe({complete:()=>alert(this.user.lastname + " was created")})
+    this.userService.createUser(this.user).subscribe({complete:()=>alert(this.user.lastname + " was created"),
+    error:(error) => alert("User creation failed: "+error.statusCode)})
   }
   setRole(event){
     this.user.role = event.target.value

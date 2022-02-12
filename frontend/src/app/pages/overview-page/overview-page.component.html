@@ -1,11 +1,13 @@
 <h1>Create new User</h1>
 <form>
     <label for="firstname">Firstname</label><br>
-    <input type="text" name="firstname" (value)="user.firstname"><br>
+    <input type="text" name="firstname" [(ngModel)]="user.firstname"><br>
     <label for="lastname">Lastname</label><br>
-    <input type="text" name="lastname" (value)="user.lastname"><br>
+    <input type="text" name="lastname" [(ngModel)]="user.lastname"><br>
     <label for="username" >Username</label><br>
-    <input type="text" name="username" (value)="user.username"><br>
+    <input type="text" name="username" [(ngModel)]="user.username"><br>
+    <label for="pw" >Initial Password</label><br>
+    <input type="text" name="pw" [(ngModel)]="user.password"><br>
     <label for="role">Role:</label>
     <select name="role" (change)="setRole($event)">
         <option value="2">Salesman</option>
