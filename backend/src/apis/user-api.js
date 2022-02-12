@@ -10,5 +10,5 @@ exports.getSelf = async function(req, res){
 }
 
 exports.add = async function(req,res){
-    userService.add(req.app.get('db'),req.body).then(()=>res.send("user created") ).catch(()=>{console.error;res.status(500).send('User creation failed');})
+    userService.add(req.app.get('db'),req.body).then(()=>res.send(req.body) ).catch((error)=>{console.error(error);res.status(500).send('User creation failed');})
 }
