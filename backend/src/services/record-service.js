@@ -9,5 +9,5 @@ exports.updateBonus = (records) => {
 }
 
 exports.calculateBonusForOrder = (order) => {
-    return order.clientRanking*order.itemsSold*6.75;
+    return order.clientRanking*order.itemsSold*7;
 }

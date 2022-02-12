@@ -6,6 +6,8 @@ const client = new MongoClient(uri);
 const PerformanceRecord = require('../models/PerformanceRecord');
 const SocialRecord = require('../models/SocialRecord');
 const OrdersRecord = require('../models/OrderRecord');
+const Approval = require("../models/Approval");
+const recordService = require("../services/record-service");
 
 exports.storeSalesman = async (salesman) => {
     try {
@@ -26,6 +28,8 @@ exports.storeSalesman = async (salesman) => {
 
 exports.storeRecord = async (salesorder) => {
     // Only try to create salesorder when govermentId is set!
+    let orders = [];
+    let social = [];
     if(salesorder.governmentId !== undefined) {
         try {
             await client.connect();
@@ -34,23 +38,26 @@ exports.storeRecord = async (salesorder) => {
                 "employeeId": salesman.employeeId,
                 "year": salesorder.year
             });
-            let orders = [];
             if (salesorder.itemsHooverClean !== undefined) {
                 let hooverClean = new OrdersRecord("HooverClean", salesorder.customername, salesorder.clientRankingNumber, salesorder.itemsHooverClean, 0, "");
+                hooverClean.bonus = recordService.calculateBonusForOrder(hooverClean);
                 orders.push(hooverClean);
             }
             if (salesorder.itemsHooverGo !== undefined) {
                 let hooverGo = new OrdersRecord("HooverGo", salesorder.customername, salesorder.clientRankingNumber, salesorder.itemsHooverGo, 0, "");
+                hooverGo.bonus = recordService.calculateBonusForOrder(hooverGo);
                 orders.push(hooverGo);
             }
-            let social = [];
             let competence = ["Leadership Competence", "Openness to Employee", "Social Behaviour to Employee", "Attitude towards Client", "Communication Skills", "Integrity to Company"]
             competence.forEach((c) => {
                 let socialRecord = new SocialRecord(c, 0, 0, 0, "");
                 social.push(socialRecord);
             });
             if (checkRecord === null) {
-                let performanceRecord = new PerformanceRecord(undefined, salesorder.year, salesman.employeeId, social, orders, 0, 0, "")
+                const approval = new Approval(false, false, false);
+                const bonusA = recordService.updateBonus(social);
+                const bonusB = recordService.updateBonus(orders);
+                let performanceRecord = new PerformanceRecord(undefined, salesorder.year, salesman.employeeId, social, orders, bonusA, bonusB, "", approval);
                 await client.db('intArch').collection("record").insertOne(performanceRecord, (err) => {
                     if (err) throw err;
                     else console.log(performanceRecord.year + " " + performanceRecord.employeeId + " inserted");
