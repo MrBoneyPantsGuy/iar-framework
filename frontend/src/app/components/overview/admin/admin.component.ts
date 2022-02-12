@@ -44,8 +44,15 @@ export class AdminComponent implements OnInit {
   }
 
   async aproveBonus(){
-    console.log(this.record._id)
-    this.adminService.aproveBonus(this.record._id,{"ceo":await this.userIsCeo(),"hr":await this.userIsHr(),"salesman":await this.userIsSalesman()}).subscribe({
+    var role = {}
+    if(await this.userIsCeo()){
+      role["ceo"] = true;
+    }else if(await this.userIsHr()){
+      role["hr"] = true;
+    }else if(await this.userIsSalesman()){
+      role["salesman"] = true;
+    }
+    this.adminService.aproveBonus(this.record._id,role).subscribe({
       complete:()=>{
         alert("Bonus aproved")
       },
