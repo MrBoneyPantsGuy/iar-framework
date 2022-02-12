@@ -69,8 +69,9 @@ exports.deleteRecord = async (req, res) => {
 
 exports.approveRecord = async (req, res) => {
     const db = req.app.get('db');
-    const data = req.body;                                                                          // get the request body
-    const approval = JSON.parse(data.approval);                                                     // parse the incoming json object
+    const data = req.body;     console.log(data)                                                                     // get the request body
+    //const approval = JSON.parse(data.approval);  
+    const approval = data.approval                                                   // parse the incoming json object
     const updatedApproval = new Approval(approval["ceo"], approval["hr"], approval["salesman"]);    // create new Approval class with updated booleans
     const approve = { $set: {approval: updatedApproval}};                                           // setup the relevant part of the update statement for mongoDB
     db.collection('record').updateOne({"_id": new ObjectId(data._id)}, approve, (err, result) => {
