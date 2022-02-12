@@ -11,23 +11,35 @@ export class SocialPerformanceEvaluationComponent implements OnInit {
   @Input() social: SocialRecord[];
   @Output() changedRecord = new EventEmitter<SocialRecord[]>();
   @Input() readonly
+
   constructor() {
   
    }
    
-   private changeBonus(bonus){
-      this.social.find(x => x.competence == bonus[0].competence).bonus = bonus[1];
-      this.saveChanges();
-   }
-   private changeRemark(remark){
-    this.social.find(x => x.competence == remark[0].competence).remark = remark[1];
-    this.saveChanges();
-   }
 
+    changeActual(value,item){
+      console.info(value)
+      this.social.find(x => x.competence == item.competence).actualValue = value;
+    this.updateBonus(item)
+    //this.saveChanges();
+   }
+   changeTarget(value,item){
+    console.info(value)
+    this.social.find(x => x.competence == item.competence).targetValue = value;
+    this.updateBonus(item)
+  //this.saveChanges();
+ }
+   updateBonus(item){
+    this.social.find(x => x.competence == item.competence).bonus = (item.targetValue < item.actualValue)?(item.actualValue - item.targetValue)*75:10;
+     console.info(item)
+     console.info(this.social.find(x => x == item).bonus)
+     this.saveChanges()
+   }
    private saveChanges(){
     this.changedRecord.emit(this.social)
    }
   ngOnInit(): void {
+    console.log("social:"+this.social)
   }
 
 }

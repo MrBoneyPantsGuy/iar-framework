@@ -89,8 +89,8 @@ export class BonusPageComponent implements OnInit {
     //update logik
     this.recordService.updatePerformanceRecord(this.record)
   }
-changeRemark(m){
-  alert();
+updateRemark(){
+  this.recordService.updatePerformanceRecord(this.record)
 }
     search(searchtext:string){
       console.log("sstring:"+searchtext)

@@ -30,11 +30,11 @@
 <app-orders-evaluation [orders]="record?.orderRecords" (changedRecord)="changedRecord($event)" [readonly]="!isRole"></app-orders-evaluation>
 <h3>Total Bonus A {{totalBonusA }}</h3>
 <hr/>
-<app-social-performance-evaluation [social]="record?.socialRecords"  [readonly]="!isRole"></app-social-performance-evaluation>
+<app-social-performance-evaluation [social]="record?.socialRecords"  [readonly]="!isRole" (changedRecord)="changedRecord($event)"></app-social-performance-evaluation>
 <h3>Total Bonus B {{totalBonusB}}</h3>
 <hr/>
 <h2>Remarks</h2>
-<textarea [(value)]="remark" [readonly]="!isRole"></textarea>
+<textarea [(ngModel)]="record.remark" (focusout)="updateRemark()" [readonly]="!isRole"></textarea>
 <hr/>
 <h3>Total Bonus A+B {{totalBonusA + totalBonusB}}</h3>
 <hr/>
