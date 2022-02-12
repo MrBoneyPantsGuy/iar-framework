@@ -1,2 +1,24 @@
-
+<h1>Create new User</h1>
+<form>
+    <label for="firstname">Firstname</label><br>
+    <input type="text" name="firstname" (value)="user.firstname"><br>
+    <label for="lastname">Lastname</label><br>
+    <input type="text" name="lastname" (value)="user.lastname"><br>
+    <label for="username" >Username</label><br>
+    <input type="text" name="username" (value)="user.username"><br>
+    <label for="role">Role:</label>
+    <select name="role" (change)="setRole($event)">
+        <option value="2">Salesman</option>
+        <option value=1>HR</option>
+        <option value=0>CEO</option>
+    </select>
+<!--    <ng-select (change)="setRole(selection)" [(ngModel)]="selection" class="w-25 p-3">
+        <ng-option>Salesman</ng-option>
+        <ng-option>HR</ng-option>
+        <ng-option>CEO</ng-option>
+</ng-select>-->
+    <label for="checkbox"> Admin</label>
+    <input type="checkbox" name="chekcbox"><br>
+    <button type="submit" (click)="createUser()">Create</button>
+</form>
 

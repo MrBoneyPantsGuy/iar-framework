@@ -11,14 +11,19 @@ import { User } from 'src/app/models/User';
 })
 export class OverviewPageComponent implements OnInit {
  user:User
-   constructor(private userService:UserService) { }
-
+   constructor(private userService:UserService) { this.user = new User("","","","","",false,Roles.SALES) }
   async ngOnInit() {
-     this.userService.getOwnUser().subscribe({next:(value)=>{console.log(value.role); this.user=value;},complete:()=>{console.log("completed");}});
   }
 
    /*fetchUser(){
      this.userService.getOwnUser().subscribe({next:(value)=>{console.log(value)},complete:()=>{console.log("completed");}});
    
   }*/
+  createUser(){
+    this.userService.createUser(this.user).subscribe({complete:()=>alert(this.user.lastname + " was created")})
+  }
+  setRole(event){
+    this.user.role = event.target.value
+    console.log(this.user.role)
+  }
 }
