@@ -27,10 +27,10 @@
 
 <app-employee-info-page [year]="year" [emplInfo]="salesman"></app-employee-info-page>
 <hr/>
-<app-orders-evaluation [orders]="record?.orderRecords" (changedRecord)="changedRecord($event)"></app-orders-evaluation>
+<app-orders-evaluation [orders]="record?.orderRecords" (changedRecord)="changedRecord($event)" [readonly]="!isRole"></app-orders-evaluation>
 <h3>Total Bonus A {{totalBonusA }}</h3>
 <hr/>
-<app-social-performance-evaluation [social]="record?.socialRecords"></app-social-performance-evaluation>
+<app-social-performance-evaluation [social]="record?.socialRecords"  [readonly]="!isRole"></app-social-performance-evaluation>
 <h3>Total Bonus B {{totalBonusB}}</h3>
 <hr/>
 <h2>Remarks</h2>

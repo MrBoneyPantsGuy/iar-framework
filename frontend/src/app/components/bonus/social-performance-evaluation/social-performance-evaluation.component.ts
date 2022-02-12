@@ -10,6 +10,7 @@ import {SocialRecord} from "../../../../../../backend/src/models/SocialRecord.js
 export class SocialPerformanceEvaluationComponent implements OnInit {
   @Input() social: SocialRecord[];
   @Output() changedRecord = new EventEmitter<SocialRecord[]>();
+  @Input() readonly
   constructor() {
   
    }

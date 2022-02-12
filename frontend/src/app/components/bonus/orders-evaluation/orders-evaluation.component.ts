@@ -12,7 +12,7 @@ export class OrdersEvaluationComponent implements OnInit {
   enumKeys:any[];
   @Input() orders: OrdersRecord[];
   @Output() changedRecord= new EventEmitter<OrdersRecord[]>();
-  
+  @Input() readonly
   constructor() {
   }
 

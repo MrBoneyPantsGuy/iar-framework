@@ -60,8 +60,18 @@ export class BonusPageComponent implements OnInit {
     console.log("init"+this.isRole)
     //this.userService.getOwnUser().subscribe(e => {this.user = e;console.log(e)})//.subscribe({next:(user)=>this.user = user})
     this.salesman =   sale.constructor("salesmanId", "firstname", "lastname", "employeeId", "department", "governmentId");
-    this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("9").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
     this.allsalesman = await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;});
+    if(!await this.userIsCeoOrHr()){
+      //console.log(await this.loadUser())
+      this.search(await this.loadUser())
+      //this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("31").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
+
+     // alert()
+    }else{
+     // this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("31").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
+      this.allsalesman = await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;});
+    }
+    
     this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
     console.log(this.records);
     
@@ -83,8 +93,10 @@ changeRemark(m){
   alert();
 }
     search(searchtext:string){
+      console.log("sstring:"+searchtext)
     this.filteredSalesman = this.allsalesman.filter(x=>x.firstname.includes(searchtext));
     if(this.filteredSalesman.length == 1){
+      console.log(this.salesman)
       this.salesman = this.filteredSalesman[0];
        this.updateUI();
      
@@ -121,7 +133,11 @@ changeRemark(m){
         this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
       }
     }
-
+    async loadUser(){
+      return await this.user.pipe(
+        pluck('firstname')
+        ).toPromise();
+    }
      async userIsCeoOrHr(){
        return 2 > await this.user.pipe(
          pluck('role')
