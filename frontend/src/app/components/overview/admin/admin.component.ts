@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
   constructor(private userService:UserService,private adminService:AdminService,private recordService:PerformanceRecordService) {
     //this.userService.getOwnUser().subscribe({next:(user)=>this.user = user})
     console.log("user" + this.user)
-    
+
    }
 
   async ngOnInit() {
@@ -44,15 +44,16 @@ export class AdminComponent implements OnInit {
   }
 
   async aproveBonus(){
-    var role = {}
+    var status = this.record.approval.status;
+    console.log(status);
     if(await this.userIsCeo()){
-      role["ceo"] = true;
+      status["ceo"] = true;
     }else if(await this.userIsHr()){
-      role["hr"] = true;
+      status["hr"] = true;
     }else if(await this.userIsSalesman()){
-      role["salesman"] = true;
+      status["salesman"] = true;
     }
-    this.adminService.aproveBonus(this.record._id,role).subscribe({
+    this.adminService.aproveBonus(this.record._id,status).subscribe({
       complete:()=>{
         alert("Bonus aproved")
       },
