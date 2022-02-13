@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -25,7 +24,10 @@ import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
 import { AdminComponent } from './components/overview/admin/admin.component';
-
+import { ChartsComponent } from './components/charts/charts.component';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,9 @@ import { AdminComponent } from './components/overview/admin/admin.component';
     SocialPerformanceEvaluationComponent,
     BonusPageComponent,
     OverviewPageComponent,
-    AdminComponent
+    AdminComponent,
+    ChartsComponent
+    
     
   ],
   imports: [
@@ -55,7 +59,8 @@ import { AdminComponent } from './components/overview/admin/admin.component';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    PlotlyModule
   ],
   providers: [],
   bootstrap: [AppComponent]
