@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { SalesmanService } from './../../services/salesman.service';
 import { EmployeeInfo } from './../../components/bonus/models/employeeInfo';
 import { Bonus } from './../../models/bonus';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { OrdersEvaluation } from 'src/app/components/bonus/models/ordersEvaluation';
 import { SocialPerformanceEvaluation } from 'src/app/components/bonus/models/socialPerformanceEvaluation';
 import {Salesman} from '../../../../../backend/src/models/Salesman.js';
@@ -24,7 +24,7 @@ const sale = require('../../../../../backend/src/models/Salesman.js');
   templateUrl: './bonus-page.component.html',
   styleUrls: ['./bonus-page.component.css']
 })
-export class BonusPageComponent implements OnInit {
+export class BonusPageComponent implements OnInit, OnChanges {
   salesmanservice: SalesmanService;
   salesman:Salesman;
   allsalesman:Salesman[];
@@ -51,6 +51,7 @@ export class BonusPageComponent implements OnInit {
     this.records = [];
     this.year = "";
     this.user =  this.userService.getOwnUser()
+    this.record = ""
     
   }
 
@@ -121,6 +122,10 @@ updateRemark(){
   async changedYear(selected){
      this.year = selected;
      this.updateUI(true);
+  }
+  ngOnChanges(){
+        this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
+        this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
   }
   async updateUI(yearIsSet=false){
       this.record = [];
