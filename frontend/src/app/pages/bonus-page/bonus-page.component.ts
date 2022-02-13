@@ -98,7 +98,11 @@ updateRemark(){
 }
     search(searchtext:string){
       console.log("sstring:"+searchtext)
-    this.filteredSalesman = this.allsalesman.filter(x=>x.firstname.includes(searchtext));
+    this.filteredSalesman = this.allsalesman.filter(
+      x=>x.firstname.toLowerCase().includes(searchtext.toLowerCase()) ||
+     x.lastname.toLowerCase().includes(searchtext.toLowerCase() ||
+     x.employeeId == searchtext));
+     
     if(this.filteredSalesman.length == 1){
       console.log(this.salesman)
       this.salesman = this.filteredSalesman[0];
