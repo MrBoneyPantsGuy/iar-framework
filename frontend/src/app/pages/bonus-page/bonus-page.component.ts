@@ -24,7 +24,7 @@ const sale = require('../../../../../backend/src/models/Salesman.js');
   templateUrl: './bonus-page.component.html',
   styleUrls: ['./bonus-page.component.css']
 })
-export class BonusPageComponent implements OnInit, OnChanges {
+export class BonusPageComponent implements OnInit {
   salesmanservice: SalesmanService;
   salesman:Salesman;
   allsalesman:Salesman[];
@@ -78,7 +78,9 @@ export class BonusPageComponent implements OnInit, OnChanges {
     
 
   }
-   changedRecord(item:[SocialRecord[]|OrderRecord[]]){
+   changedRecord(item:SocialRecord[]|OrderRecord[]){
+     alert("updater called")
+     console.log("change"+item)
     if(item[0].hasOwnProperty("competence")){
       this.record.socialRecords = item
     }else if(item[0].hasOwnProperty("productname")){
@@ -88,8 +90,8 @@ export class BonusPageComponent implements OnInit, OnChanges {
       throw new Error();
     }
     //update logik
-    this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
-    this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
+    this.record.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
+    this.record.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
     this.recordService.updatePerformanceRecord(this.record)
   }
 updateRemark(){
@@ -125,10 +127,7 @@ updateRemark(){
      this.year = selected;
      this.updateUI(true);
   }
-  ngOnChanges(){
-        this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
-        this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
-  }
+
   async updateUI(yearIsSet=false){
       this.record = [];
       this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
@@ -136,8 +135,8 @@ updateRemark(){
         this.year = ""+this.latestYear(this.records,);
       if(this.records.length > 0){
         this.record = this.records.find(x=>x.year == this.year);
-        this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
-        this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
+        this.record.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
+        this.record.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
       }
     }
     async loadUser(){
