@@ -55,8 +55,8 @@ exports.storeRecord = async (salesorder) => {
             });
             if (checkRecord === null) {
                 const approval = new Approval(false, false, false);
-                const bonusA = recordService.updateBonus(social);
-                const bonusB = recordService.updateBonus(orders);
+                const bonusA = recordService.updateBonus(orders);
+                const bonusB = recordService.updateBonus(social);
                 let performanceRecord = new PerformanceRecord(undefined, salesorder.year, salesman.employeeId, social, orders, bonusA, bonusB, "", approval);
                 await client.db('intArch').collection("record").insertOne(performanceRecord, (err) => {
                     if (err) throw err;

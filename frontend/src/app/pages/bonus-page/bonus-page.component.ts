@@ -52,11 +52,11 @@ export class BonusPageComponent implements OnInit {
     this.year = "";
     this.user =  this.userService.getOwnUser()
     this.record = ""
-    
+
   }
 
   async ngOnInit() {
-    
+
     this.isRole = await this.userIsCeoOrHr()
     console.log("init"+this.isRole)
     //this.userService.getOwnUser().subscribe(e => {this.user = e;console.log(e)})//.subscribe({next:(user)=>this.user = user})
@@ -72,14 +72,13 @@ export class BonusPageComponent implements OnInit {
      // this.salesman = await this.salesmanservice.getSalesmanByEmployeeId("31").toPromise().then(e=>{console.log("obj:",e.body.firstname);return e.body;});
       this.allsalesman = await this.salesmanservice.getSalesmans().toPromise().then(x=>{return x.body;});
     }
-    
+
     this.records = await this.recordService.getPerformanceRecord(this.salesman.employeeId).toPromise().then(x=>{return x.body;});
     console.log(this.records);
-    
+
 
   }
    changedRecord(item:SocialRecord[]|OrderRecord[]){
-     alert("updater called")
      console.log("change"+item)
     if(item[0].hasOwnProperty("competence")){
       this.record.socialRecords = item
@@ -104,8 +103,8 @@ updateRemark(){
       console.log(this.salesman)
       this.salesman = this.filteredSalesman[0];
        this.updateUI();
-     
-      
+
+
     }
   }
 
@@ -115,7 +114,7 @@ updateRemark(){
       console.log(y);
       var yearNumber:number = +y.year;
       this.bonusYears.push(yearNumber);
-      
+
       if(yearNumber>x)
         x=yearNumber
     });

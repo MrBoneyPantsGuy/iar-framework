@@ -53,7 +53,7 @@ exports.updateBonusSalary = async (record) => {
 
     // call OrangeHRM Api and store the bonus
     let bonus = await axios(config)
-        .then( response => console.log(response))
+        .then()
         .catch(function (error) {
             console.log(error);
         });

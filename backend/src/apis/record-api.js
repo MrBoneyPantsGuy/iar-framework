@@ -40,9 +40,9 @@ exports.updateRecord = async (req, res) => {
     data.orderRecords.forEach((order) => {
         order.bonus = recordService.calculateBonusForOrder(order);
     })
-    const bonusA = recordService.updateBonus(data.socialRecords);
-    const bonusB = recordService.updateBonus(data.orderRecords);
-    const performanceRecord = { $set: {year: data.year, socialRecords: data.socialRecords, orderRecords: data.orderRecords, totalBonusA: bonusA, totalBonusB: bonusB, remark: data.remark}};
+    data.totalBonusA = recordService.updateBonus(data.orderRecords);
+    data.totalBonusB = recordService.updateBonus(data.socialRecords);
+    const performanceRecord = { $set: {year: data.year, socialRecords: data.socialRecords, orderRecords: data.orderRecords, totalBonusA: data.totalBonusA, totalBonusB: data.totalBonusB, remark: data.remark}};
     let response = await orangeHRMService.updateBonusSalary(data);
     db.collection('record').updateOne({"_id": new ObjectId(data._id)}, performanceRecord, (err, result) => {
         if (err) throw err;
