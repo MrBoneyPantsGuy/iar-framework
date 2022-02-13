@@ -88,6 +88,8 @@ export class BonusPageComponent implements OnInit, OnChanges {
       throw new Error();
     }
     //update logik
+    this.totalBonusA = this.record.orderRecords.reduce((sum,current)=> sum + current.bonus,0)
+    this.totalBonusB  = this.record.socialRecords.reduce((sum,current)=> sum + current.bonus,0)
     this.recordService.updatePerformanceRecord(this.record)
   }
 updateRemark(){
