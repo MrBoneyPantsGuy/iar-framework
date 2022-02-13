@@ -9,7 +9,7 @@ import {OrdersRecord} from '../../../../../../backend/src/models/OrderRecord.js'
 })
 export class OrdersEvaluationComponent implements OnInit {
   clientRankings = ClientRankingEnum;
-  enumKeys:any[];
+  ranking = ["","good","very good","excellent"]
   @Input() orders: OrdersRecord[];
   @Output() changedRecord= new EventEmitter<OrdersRecord[]>();
   @Input() readonly

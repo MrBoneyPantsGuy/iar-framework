@@ -28,7 +28,7 @@
   <tr *ngIf="item.itemsHooverGo == undefined && item.itemsHooverClean == undefined">
     <td><input type="text" readonly placeholder="{{item.productname}}"></td>
     <td><input type="text" readonly placeholder="{{item.client}}"/></td>
-    <td><input type="text"readonly placeholder="{{item.clientRanking}}"/></td>  
+    <td><input type="text" readonly placeholder="{{ranking[item.clientRanking]}}"/></td>  
     <td ><input type="text" readonly placeholder="{{item.itemsSold/1}}"/></td>
     <td><input type="text"  readonly placeholder="{{item.bonus}}"/></td>
     <td><input type="text" value="{{item.remark}}" (focusout)="changeRemark([item,$event.target.value])" [readonly]="readonly"/></td>
