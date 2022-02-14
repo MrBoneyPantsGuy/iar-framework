@@ -8,6 +8,7 @@ const SocialRecord = require('../models/SocialRecord');
 const OrdersRecord = require('../models/OrderRecord');
 const Approval = require("../models/Approval");
 const recordService = require("../services/record-service");
+const {ObjectId} = require("mongodb");
 
 exports.storeSalesman = async (salesman) => {
     try {
@@ -38,7 +39,7 @@ exports.storeRecord = async (salesorder) => {
                 "employeeId": salesman.employeeId,
                 "year": salesorder.year
             });
-            if (salesorder.itemsHooverClean !== undefined) {
+            if(salesorder.itemsHooverClean !== undefined) {
                 let hooverClean = new OrdersRecord("HooverClean", salesorder.customername, salesorder.clientRankingNumber, salesorder.itemsHooverClean, 0, "");
                 hooverClean.bonus = recordService.calculateBonusForOrder(hooverClean);
                 orders.push(hooverClean);
@@ -63,7 +64,30 @@ exports.storeRecord = async (salesorder) => {
                     else console.log(performanceRecord.year + " " + performanceRecord.employeeId + " inserted");
                 });
             } else {
-                //TODO
+                // check if orders to add are already in the array by a hopefully unique combination
+                orders.forEach((order) => {
+                    let isAlreadyStored = checkRecord.orderRecords.some(element => {
+                        return(element.client == order.client
+                            && element.clientRanking == order.clientRanking
+                            && element.itemsSold == order.itemsSold
+                            && element.bonus == order.bonus
+                        )
+                    });
+
+                    if(!isAlreadyStored) {  // push new order to array
+                        let {...object} = order;
+                        checkRecord.orderRecords.push(object);
+                    } else {
+                        console.log("ITS ALREADY STORED!");
+                    }
+                });
+
+                checkRecord.totalBonusA = recordService.updateBonus(checkRecord.orderRecords);
+                const performanceRecord = { $set: {orderRecords: checkRecord.orderRecords, totalBonusA: checkRecord.totalBonusA, totalBonusB: checkRecord.totalBonusB}};
+                await client.db('intArch').collection("record").updateOne({"_id": new ObjectId(checkRecord._id)}, performanceRecord, (err) => {
+                    if (err) throw err;
+                    else console.log(checkRecord.year + " " + checkRecord.employeeId + " updated");
+                });
             }
         } catch (err) {
             console.log(err);
