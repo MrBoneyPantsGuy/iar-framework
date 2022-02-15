@@ -25,6 +25,7 @@ export class OrdersEvaluationComponent implements OnInit {
     this.saveChanges();
  }
   changeRemark(remark){
+    console.log(this.orders[remark[0]])
   this.orders[remark[0]].remark = remark[1];
   this.saveChanges();
  }

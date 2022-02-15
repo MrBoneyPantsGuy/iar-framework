@@ -8,7 +8,7 @@
     <td class="columnTitle">Bonus</td>
     <td class="columnTitle">Remarks</td>
   </tr>
-<ng-container *ngFor="let item of orders; let index">
+<ng-container *ngFor="let item of orders; let i = index">
   <!--<tr *ngIf="item.itemsHooverClean != undefined">
     <td><input type="text" readonly placeholder="Hoover Clean"></td>
     <td><input type="text" readonly placeholder="{{item.client}}"/></td>
@@ -31,7 +31,7 @@
     <td><input type="text" readonly placeholder="{{ranking[item.clientRanking]}}"/></td>  
     <td ><input type="text" readonly placeholder="{{item.itemsSold/1}}"/></td>
     <td><input type="text"  readonly placeholder="{{item.bonus}}"/></td>
-    <td><input type="text" value="{{item.remark}}" (focusout)="changeRemark([index,$event.target.value])" [readonly]="readonly"/></td>
+    <td><input type="text" value="{{item.remark}}" (focusout)="changeRemark([i,$event.target.value])" [readonly]="readonly"/></td>
   </tr>
 </ng-container>
 </table>
