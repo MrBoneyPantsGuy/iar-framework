@@ -25,7 +25,7 @@ export class OrdersEvaluationComponent implements OnInit {
     this.saveChanges();
  }
   changeRemark(remark){
-  this.orders.find(x => x.productname == remark[0].productname).remark = remark[1];
+  this.orders[remark[0]].remark = remark[1];
   this.saveChanges();
  }
  private saveChanges(){
