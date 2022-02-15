@@ -1,0 +1,1668 @@
+{
+	"info": {
+		"_postman_id": "9ff7efed-9ed8-444f-bad4-374dc2f1e082",
+		"name": "IA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "NodeAPI",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"ceo2\",\r\n    \"firstname\": \"\",\r\n    \"lastname\": \"ceo\",\r\n    \"email\": \"\",\r\n    \"password\": \"test\",\r\n    \"isAdmin\": true,\r\n    \"role\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "loginLuis",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "wyYld7jRqkE=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginSara",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "ZIkVGz9LsRg=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginSebi",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "kJHv+o1iO+E=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getToken",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "salesman",
+					"item": [
+						{
+							"name": "getSalesmanByEmployeeId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/employeeid/:employeeid",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										"employeeid",
+										":employeeid"
+									],
+									"variable": [
+										{
+											"key": "employeeid",
+											"value": "85"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllSalesman",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSalesmanBySalesmanId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/id/:salesmanid",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										"id",
+										":salesmanid"
+									],
+									"variable": [
+										{
+											"key": "salesmanid",
+											"value": "61991b3985f009b44c0a65f5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "querySalesmen",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/query/:attribute/:key",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										"query",
+										":attribute",
+										":key"
+									],
+									"variable": [
+										{
+											"key": "attribute",
+											"value": "department"
+										},
+										{
+											"key": "key",
+											"value": "MI6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createSalesman",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstname",
+											"value": "James",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "Bond",
+											"type": "text"
+										},
+										{
+											"key": "employeeId",
+											"value": "7",
+											"type": "text"
+										},
+										{
+											"key": "department",
+											"value": "MI6",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/salesman",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateSalesman",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstname",
+											"value": "James",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "Bond",
+											"type": "text"
+										},
+										{
+											"key": "employeeId",
+											"value": "007",
+											"type": "text"
+										},
+										{
+											"key": "department",
+											"value": "MI7",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "61991b3985f009b44c0a65f5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteSalesman",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6199fcccd5c67f8f5b05a767"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "record",
+					"item": [
+						{
+							"name": "getRecord",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/record/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "9"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createRecord",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "employeeId",
+											"value": "9",
+											"description": "muss zum testen evtl. angepasst werden",
+											"type": "text"
+										},
+										{
+											"key": "socialRecords",
+											"value": "[{\"competence\": \"a\", \"targetValue\": \"1\", \"actualValue\": \"2\", \"bonus\": \"3\", \"remark\": \"Notiz\"},{\"competence\": \"a\", \"targetValue\": \"1\", \"actualValue\": \"2\", \"bonus\": \"3\", \"remark\": \"Notiz\"}]",
+											"type": "text"
+										},
+										{
+											"key": "orderRecords",
+											"value": "[{\"productname\": \"product\", \"client\": \"client\", \"clientRanking\": \"1\", \"itemSold\": \"2\", \"bonus\": \"3\", \"remark\": \"Notiz\"},{\"productname\": \"product\", \"client\": \"client\", \"clientRanking\": \"1\", \"itemSold\": \"2\", \"bonus\": \"3\", \"remark\": \"Notiz\"}]",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusA",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusB",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "Noch eine Notiz",
+											"type": "text"
+										},
+										{
+											"key": "year",
+											"value": "2022",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/record",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateRecord",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_id",
+											"value": "61ffd0a5932c24da9a0b1a2c",
+											"description": "muss zum testen evtl. angepasst werden",
+											"type": "text"
+										},
+										{
+											"key": "socialRecords",
+											"value": "[{\"competence\": \"b\", \"targetValue\": 4, \"actualValue\": 3, \"bonus\": 2, \"remark\": \"Notiz\"},{\"competence\": \"a\", \"targetValue\": 1, \"actualValue\": 2, \"bonus\": 3, \"remark\": \"Änderung\"}]",
+											"type": "text"
+										},
+										{
+											"key": "orderRecords",
+											"value": "[{\"productname\": \"product\", \"client\": \"client\", \"clientRanking\": 1, \"itemSold\": 2, \"bonus\": 3, \"remark\": \"Update1\"},{\"productname\": \"product\", \"client\": \"client\", \"clientRanking\": 1, \"itemSold\": 2, \"bonus\": 3, \"remark\": \"NotizUpdate3\"}]",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusA",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusB",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "Noch eine Notizzz",
+											"type": "text"
+										},
+										{
+											"key": "year",
+											"value": "2022",
+											"type": "default"
+										},
+										{
+											"key": "approval",
+											"value": "{\"ceo\": true, \"hr\": true, \"salesman\": false}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/record",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "approveRecord",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_id",
+											"value": "61d41b60b1d0576211cf3009",
+											"description": "insert _id from mongodb performanceRecord here...",
+											"type": "text"
+										},
+										{
+											"key": "approval",
+											"value": "{ceo: true}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/record/approve",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record",
+										"approve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteRecord",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/record/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "619a0d14dbb1bf14060a299a"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "salesmanRunner",
+					"item": [
+						{
+							"name": "loginLuis Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "wyYld7jRqkE=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginSara Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "ZIkVGz9LsRg=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginSebi Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "kJHv+o1iO+E=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createSalesman",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.sendRequest(\"http://localhost:8080/api/salesman/employeeid/7\", function (err, response) {",
+											"    pm.collectionVariables.set(\"salesmanId\", response.json()._id);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstname",
+											"value": "James",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "Bond",
+											"type": "text"
+										},
+										{
+											"key": "employeeId",
+											"value": "7",
+											"type": "text"
+										},
+										{
+											"key": "department",
+											"value": "MI6",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/salesman",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSalesmanByEmployeeId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/employeeid/:employeeid",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										"employeeid",
+										":employeeid"
+									],
+									"variable": [
+										{
+											"key": "employeeid",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSalesmanBySalesmanId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/id/:salesmanid",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										"id",
+										":salesmanid"
+									],
+									"variable": [
+										{
+											"key": "salesmanid",
+											"value": "{{salesmanId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateSalesman",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "firstname",
+											"value": "James",
+											"type": "text"
+										},
+										{
+											"key": "lastname",
+											"value": "Bond",
+											"type": "text"
+										},
+										{
+											"key": "employeeId",
+											"value": "007",
+											"type": "text"
+										},
+										{
+											"key": "department",
+											"value": "MI7",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{salesmanId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteSalesman",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/salesman/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"salesman",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{salesmanId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "RecordRunner",
+					"item": [
+						{
+							"name": "loginLuis Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "wyYld7jRqkE=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginSara Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "ZIkVGz9LsRg=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginSebi Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1kDVPA2YMo8=",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createRecord Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "salesmanId",
+											"value": "007",
+											"description": "muss zum testen evtl. angepasst werden",
+											"type": "text"
+										},
+										{
+											"key": "socialRecords",
+											"value": "{competence: \"a\", targetValue: \"1\", actualValue: \"2\", bonus: \"3\", remark: \"Notiz\"};{competence: \"a\", targetValue: \"1\", actualValue: \"2\", bonus: \"3\", remark: \"Notiz\"}",
+											"type": "text"
+										},
+										{
+											"key": "ordersRecords",
+											"value": "{productname: \"product\", client: \"client\", clientRanking: \"1\", itemSold: \"2\", bonus: \"3\", remark: \"Notiz\"};{productname: \"product\", client: \"client\", clientRanking: \"1\", itemSold: \"2\", bonus: \"3\", remark: \"Notiz\"}",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusA",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusB",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "Noch eine Notiz",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/record",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getRecord Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.sendRequest(\"http://localhost:8080/api/record/007\", function (err, response) {",
+											"    pm.collectionVariables.set(\"recordId\", response.json()._id);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/record/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "007"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateRecord Copy",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "salesmanId",
+											"value": "6199fcccd5c67f8f5b05a767",
+											"description": "muss zum testen evtl. angepasst werden",
+											"type": "text"
+										},
+										{
+											"key": "socialRecords",
+											"value": "{competence: \"b\", targetValue: \"1\", actualValue: \"2\", bonus: \"3\", remark: \"Notiz\"}; {competence: \"a\", targetValue: \"1\", actualValue: \"2\", bonus: \"3\", remark: \"Notiz\"}",
+											"type": "text"
+										},
+										{
+											"key": "ordersRecords",
+											"value": "{productname: \"productB\", client: \"client\", clientRanking: \"1\", itemSold: \"2\", bonus: \"3\", remark: \"Notiz\"}; {productname: \"product\", client: \"client\", clientRanking: \"1\", itemSold: \"2\", bonus: \"3\", remark: \"Notiz\"}",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusA",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "totalBonusB",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "Noch eine Notiz",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/record/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{recordId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteRecord Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/record/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"record",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{recordId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Control",
+					"item": [
+						{
+							"name": "fetchAllEmployees",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/control/fetchemployees",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"control",
+										"fetchemployees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getallsalesorders",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/control/getallsalesorders",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"control",
+										"getallsalesorders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getallcustomers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/control/getallcustomers",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"control",
+										"getallcustomers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CRX",
+			"item": [
+				{
+					"name": "All Accounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{crxUrl}}/org.opencrx.kernel.account1/provider/CRX/segment/Standard/account",
+							"host": [
+								"{{crxUrl}}"
+							],
+							"path": [
+								"org.opencrx.kernel.account1",
+								"provider",
+								"CRX",
+								"segment",
+								"Standard",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All salesOrders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{crxUrl}}/org.opencrx.kernel.contract1/provider/CRX/segment/Standard/salesOrder",
+							"host": [
+								"{{crxUrl}}"
+							],
+							"path": [
+								"org.opencrx.kernel.contract1",
+								"provider",
+								"CRX",
+								"segment",
+								"Standard",
+								"salesOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HRM",
+			"item": [
+				{
+					"name": "Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var barrierToken = response[\"access_token\"];\r",
+									"pm.collectionVariables.set(\"token\",barrierToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "*Safb02da42Demo$",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Lysek",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "api_oauth_id",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "oauth_secret",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://sepp-hrm.inf.h-brs.de/symfony/web/index.php/oauth/issueToken",
+							"protocol": "https",
+							"host": [
+								"sepp-hrm",
+								"inf",
+								"h-brs",
+								"de"
+							],
+							"path": [
+								"symfony",
+								"web",
+								"index.php",
+								"oauth",
+								"issueToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salesman",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hrmUrl}}/user",
+							"host": [
+								"{{hrmUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hrmUrl}}/organization",
+							"host": [
+								"{{hrmUrl}}"
+							],
+							"path": [
+								"organization"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Employee-3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{hrmUrl}}/employee/:id",
+							"host": [
+								"{{hrmUrl}}"
+							],
+							"path": [
+								"employee",
+								":id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "90123",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hrmUrl}}/employee/search",
+							"host": [
+								"{{hrmUrl}}"
+							],
+							"path": [
+								"employee",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BonusSalary",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "year",
+									"value": "2021",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "2000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hrmUrl}}/employee/:id/bonussalary",
+							"host": [
+								"{{hrmUrl}}"
+							],
+							"path": [
+								"employee",
+								":id",
+								"bonussalary"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "salesmanId",
+			"value": ""
+		}
+	]
+}
